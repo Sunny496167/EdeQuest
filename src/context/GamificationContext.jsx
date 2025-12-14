@@ -96,6 +96,18 @@ export const GamificationProvider = ({ children }) => {
         };
     });
 
+    // Unlocked difficulty levels per subject
+    const [unlockedLevels, setUnlockedLevels] = useState(() => {
+        const saved = localStorage.getItem('eduquest_unlocked_levels');
+        return saved ? JSON.parse(saved) : {
+            math: ['easy'],
+            algebra: ['easy'],
+            science: ['easy'],
+            geography: ['easy'],
+            history: ['easy']
+        };
+    });
+
     // Sync stars to localStorage
     useEffect(() => {
         localStorage.setItem('eduquest_stars', stars.toString());
@@ -110,6 +122,11 @@ export const GamificationProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('eduquest_progress', JSON.stringify(progress));
     }, [progress]);
+
+    // Sync unlocked levels to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_unlocked_levels', JSON.stringify(unlockedLevels));
+    }, [unlockedLevels]);
 
     // Add a star
     const addStar = () => {
@@ -167,16 +184,43 @@ export const GamificationProvider = ({ children }) => {
         return badges.includes(badgeId);
     };
 
+    // Unlock a difficulty level for a subject
+    const unlockLevel = (subject, level) => {
+        setUnlockedLevels(prev => {
+            if (!prev[subject]?.includes(level)) {
+                return {
+                    ...prev,
+                    [subject]: [...(prev[subject] || []), level]
+                };
+            }
+            return prev;
+        });
+    };
+
+    // Check if a difficulty level is unlocked for a subject
+    const isLevelUnlocked = (subject, level) => {
+        return unlockedLevels[subject]?.includes(level) || false;
+    };
+
+    // Get unlocked levels for a subject
+    const getUnlockedLevels = (subject) => {
+        return unlockedLevels[subject] || ['easy'];
+    };
+
     const value = {
         stars,
         badges,
         progress,
+        unlockedLevels,
         addStar,
         unlockBadge,
         updateProgress,
         incrementProgress,
         getAllBadges,
-        isBadgeUnlocked
+        isBadgeUnlocked,
+        unlockLevel,
+        isLevelUnlocked,
+        getUnlockedLevels
     };
 
     return (

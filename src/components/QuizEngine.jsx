@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useGamification } from '../context/GamificationContext';
 
-function QuizEngine({ title, subtitle, questions, subject, emoji = '📝' }) {
-    const { addStar, incrementProgress, unlockBadge } = useGamification();
+function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', difficulty = 'easy', onComplete }) {
+    const { addStar, incrementProgress, unlockBadge, unlockLevel } = useGamification();
 
     // State management
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -27,6 +27,45 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝' }) {
         } else {
             setFeedbackMessage('Not quite! Keep learning! 💡');
         }
+
+        // Check if this is the last question
+        if (currentQuestionIndex === questions.length - 1) {
+            // Quiz completed
+            setTimeout(() => {
+                setFeedbackMessage('🎊 Amazing! You completed the quiz! 🎊');
+
+                // Update progress (10% per quiz completion)
+                incrementProgress(subject, 10);
+
+                // Unlock subject badge
+                const badgeMap = {
+                    math: 'math_explorer',
+                    algebra: 'math_explorer',
+                    science: 'science_explorer',
+                    geography: 'geography_explorer',
+                    history: 'history_explorer'
+                };
+
+                if (badgeMap[subject]) {
+                    unlockBadge(badgeMap[subject]);
+                }
+
+                // Unlock first quiz badge
+                unlockBadge('first_quiz');
+
+                // Unlock next difficulty level
+                if (difficulty === 'easy') {
+                    unlockLevel(subject, 'medium');
+                } else if (difficulty === 'medium') {
+                    unlockLevel(subject, 'hard');
+                }
+
+                // Call onComplete callback if provided
+                if (onComplete) {
+                    onComplete();
+                }
+            }, 1500); // Delay to show correct/wrong feedback first
+        }
     };
 
     // Move to next question
@@ -36,28 +75,6 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝' }) {
             setSelectedOption(null);
             setFeedbackMessage('');
             setIsAnswered(false);
-        } else {
-            // Quiz completed
-            setFeedbackMessage('🎊 Amazing! You completed the quiz! 🎊');
-
-            // Update progress (10% per quiz completion)
-            incrementProgress(subject, 10);
-
-            // Unlock subject badge
-            const badgeMap = {
-                math: 'math_explorer',
-                algebra: 'math_explorer',
-                science: 'science_explorer',
-                geography: 'geography_explorer',
-                history: 'history_explorer'
-            };
-
-            if (badgeMap[subject]) {
-                unlockBadge(badgeMap[subject]);
-            }
-
-            // Unlock first quiz badge
-            unlockBadge('first_quiz');
         }
     };
 
@@ -154,10 +171,10 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝' }) {
                     {/* Feedback Message */}
                     {feedbackMessage && (
                         <div className={`text-center mb-6 p-4 rounded-xl ${feedbackMessage.includes('Excellent')
-                                ? 'bg-green-100 text-green-800'
-                                : feedbackMessage.includes('Not quite')
-                                    ? 'bg-yellow-100 text-yellow-800'
-                                    : 'bg-purple-100 text-purple-800'
+                            ? 'bg-green-100 text-green-800'
+                            : feedbackMessage.includes('Not quite')
+                                ? 'bg-yellow-100 text-yellow-800'
+                                : 'bg-purple-100 text-purple-800'
                             }`}>
                             <p className="text-xl font-bold">{feedbackMessage}</p>
                         </div>
