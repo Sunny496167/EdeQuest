@@ -1,10 +1,10 @@
 import Layout from './components/Layout';
-import Science from './pages/Science';
+import Geography from './pages/Geography';
 
 function App() {
   return (
     <Layout>
-      <Science />
+      <Geography />
     </Layout>
   );
 }
