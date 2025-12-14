@@ -7,6 +7,7 @@ import Science from './pages/Science';
 import Geography from './pages/Geography';
 import History from './pages/History';
 import Progress from './pages/Progress';
+import Rewards from './pages/Rewards';
 import { GamificationProvider } from './context/GamificationContext';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/geography" element={<Geography />} />
           <Route path="/history" element={<History />} />
           <Route path="/progress" element={<Progress />} />
+          <Route path="/rewards" element={<Rewards />} />
         </Routes>
       </Layout>
     </GamificationProvider>

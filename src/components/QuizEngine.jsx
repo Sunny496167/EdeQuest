@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useGamification } from '../context/GamificationContext';
 
 function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', difficulty = 'easy', onComplete }) {
-    const { addStar, incrementProgress, unlockBadge, unlockLevel, incrementDailySolved } = useGamification();
+    const { addStar, incrementProgress, unlockBadge, unlockLevel, incrementDailySolved, incrementCompletedQuizzes, checkRewardConditions } = useGamification();
 
     // State management
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -75,6 +75,12 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                 } else if (difficulty === 'medium') {
                     unlockLevel(subject, 'hard');
                 }
+
+                // Increment completed quizzes count
+                incrementCompletedQuizzes();
+
+                // Check and trigger rewards
+                checkRewardConditions();
 
                 // Call onComplete callback if provided
                 if (onComplete) {

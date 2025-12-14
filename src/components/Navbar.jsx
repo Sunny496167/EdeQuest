@@ -120,6 +120,20 @@ function Navbar() {
                         <span>Progress</span>
                     </NavLink>
 
+                    <NavLink
+                        to="/rewards"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🎁</span>
+                        <span>Rewards</span>
+                    </NavLink>
+
                     {/* Stars Display */}
                     <StarsDisplay stars={stars} />
 

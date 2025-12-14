@@ -127,6 +127,22 @@ export const GamificationProvider = ({ children }) => {
         return saved || getTodayDate();
     });
 
+    // Avatar and reward state
+    const [unlockedAvatars, setUnlockedAvatars] = useState(() => {
+        const saved = localStorage.getItem('eduquest_unlocked_avatars');
+        return saved ? JSON.parse(saved) : [1]; // Avatar 1 unlocked by default
+    });
+
+    const [selectedAvatar, setSelectedAvatar] = useState(() => {
+        const saved = localStorage.getItem('eduquest_selected_avatar');
+        return saved ? parseInt(saved, 10) : 1; // Avatar 1 selected by default
+    });
+
+    const [completedQuizzes, setCompletedQuizzes] = useState(() => {
+        const saved = localStorage.getItem('eduquest_completed_quizzes');
+        return saved ? parseInt(saved, 10) : 0;
+    });
+
     // Check and reset daily goal if new day
     useEffect(() => {
         const today = getTodayDate();
@@ -166,6 +182,21 @@ export const GamificationProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('eduquest_last_active_date', lastActiveDate);
     }, [lastActiveDate]);
+
+    // Sync unlocked avatars to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_unlocked_avatars', JSON.stringify(unlockedAvatars));
+    }, [unlockedAvatars]);
+
+    // Sync selected avatar to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_selected_avatar', selectedAvatar.toString());
+    }, [selectedAvatar]);
+
+    // Sync completed quizzes to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_completed_quizzes', completedQuizzes.toString());
+    }, [completedQuizzes]);
 
     // Add a star
     const addStar = () => {
@@ -275,6 +306,71 @@ export const GamificationProvider = ({ children }) => {
         }
     };
 
+    // Unlock an avatar
+    const unlockAvatar = (avatarId) => {
+        setUnlockedAvatars(prev => {
+            if (!prev.includes(avatarId)) {
+                return [...prev, avatarId];
+            }
+            return prev;
+        });
+    };
+
+    // Select an avatar
+    const selectAvatar = (avatarId) => {
+        if (unlockedAvatars.includes(avatarId)) {
+            setSelectedAvatar(avatarId);
+        }
+    };
+
+    // Check reward conditions and unlock avatars
+    const checkRewardConditions = () => {
+        const rewards = [];
+
+        // Avatar 2 (Wizard): Complete first quiz
+        if (completedQuizzes >= 1 && !unlockedAvatars.includes(2)) {
+            unlockAvatar(2);
+            rewards.push({ avatarId: 2, message: "You completed your first quiz!" });
+        }
+
+        // Avatar 3 (Rocket): Complete daily goal
+        if (isDailyGoalCompleted() && !unlockedAvatars.includes(3)) {
+            unlockAvatar(3);
+            rewards.push({ avatarId: 3, message: "You completed your daily goal!" });
+        }
+
+        // Avatar 4 (Super Hero): Earn 20 stars
+        if (stars >= 20 && !unlockedAvatars.includes(4)) {
+            unlockAvatar(4);
+            rewards.push({ avatarId: 4, message: "You earned 20 stars!" });
+        }
+
+        // Avatar 5 (Artist): Complete 5 quizzes
+        if (completedQuizzes >= 5 && !unlockedAvatars.includes(5)) {
+            unlockAvatar(5);
+            rewards.push({ avatarId: 5, message: "You completed 5 quizzes!" });
+        }
+
+        // Avatar 6 (Champion): Unlock all badges
+        if (badges.length >= AVAILABLE_BADGES.length && !unlockedAvatars.includes(6)) {
+            unlockAvatar(6);
+            rewards.push({ avatarId: 6, message: "You unlocked all badges!" });
+        }
+
+        // Avatar 7 (Star Student): Earn 50 stars
+        if (stars >= 50 && !unlockedAvatars.includes(7)) {
+            unlockAvatar(7);
+            rewards.push({ avatarId: 7, message: "You earned 50 stars!" });
+        }
+
+        return rewards;
+    };
+
+    // Increment completed quizzes
+    const incrementCompletedQuizzes = () => {
+        setCompletedQuizzes(prev => prev + 1);
+    };
+
     const value = {
         stars,
         badges,
@@ -283,6 +379,9 @@ export const GamificationProvider = ({ children }) => {
         dailyGoalTarget,
         dailySolvedCount,
         lastActiveDate,
+        unlockedAvatars,
+        selectedAvatar,
+        completedQuizzes,
         addStar,
         unlockBadge,
         updateProgress,
@@ -294,7 +393,11 @@ export const GamificationProvider = ({ children }) => {
         getUnlockedLevels,
         incrementDailySolved,
         isDailyGoalCompleted,
-        resetDailyGoalIfNewDay
+        resetDailyGoalIfNewDay,
+        unlockAvatar,
+        selectAvatar,
+        checkRewardConditions,
+        incrementCompletedQuizzes
     };
 
     return (
