@@ -1,3 +1,140 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ===================================
+   ACCESSIBILITY STYLES
+   =================================== */
+
+/* Visible Focus Rings for Keyboard Navigation */
+*:focus-visible {
+    outline: 3px solid #7C3AED;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #7C3AED;
+    outline-offset: 3px;
+}
+
+/* Large Text Mode */
+html.large-text {
+    font-size: 125%;
+    /* Increase base font size by 25% */
+}
+
+html.large-text h1 {
+    font-size: 3.5rem;
+    /* Larger headings */
+}
+
+html.large-text h2 {
+    font-size: 2.5rem;
+}
+
+html.large-text h3 {
+    font-size: 2rem;
+}
+
+html.large-text button,
+html.large-text .text-lg {
+    font-size: 1.5rem;
+}
+
+html.large-text .text-xl {
+    font-size: 1.75rem;
+}
+
+html.large-text .text-2xl {
+    font-size: 2rem;
+}
+
+html.large-text .text-3xl {
+    font-size: 2.5rem;
+}
+
+/* High Contrast Mode */
+html.high-contrast {
+    --tw-bg-opacity: 1;
+}
+
+html.high-contrast body {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+html.high-contrast .text-gray-600,
+html.high-contrast .text-gray-700 {
+    color: #000000 !important;
+}
+
+html.high-contrast .text-gray-800 {
+    color: #000000 !important;
+    font-weight: 700;
+}
+
+html.high-contrast .bg-gradient-to-br,
+html.high-contrast .bg-gradient-to-r {
+    background: #FFFFFF !important;
+    border: 3px solid #000000 !important;
+}
+
+html.high-contrast button {
+    border: 2px solid #000000 !important;
+    font-weight: 700;
+}
+
+html.high-contrast .bg-primary {
+    background-color: #5B21B6 !important;
+    color: #FFFFFF !important;
+}
+
+html.high-contrast .text-primary {
+    color: #5B21B6 !important;
+    font-weight: 700;
+}
+
+html.high-contrast a {
+    color: #5B21B6 !important;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Ensure good contrast for shadows in high contrast mode */
+html.high-contrast .shadow-md,
+html.high-contrast .shadow-lg,
+html.high-contrast .shadow-xl {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Skip to main content link (for screen readers and keyboard users) */
+.skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1rem;
+    background-color: #7C3AED;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.skip-to-main:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1rem;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
