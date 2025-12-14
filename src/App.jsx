@@ -1,10 +1,10 @@
 import Layout from './components/Layout';
-import Home from './pages/Home';
+import Math from './pages/Math';
 
 function App() {
   return (
     <Layout>
-      <Home />
+      <Math />
     </Layout>
   );
 }
