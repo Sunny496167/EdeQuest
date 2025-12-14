@@ -1,3 +1,5 @@
+import { useGamification } from '../context/GamificationContext';
+import StarsDisplay from './StarsDisplay';
 function Navbar() {
     const navItems = [
         { name: 'Home', emoji: '🏠' },
@@ -7,34 +9,58 @@ function Navbar() {
         { name: 'Geography', emoji: '🌍' },
     ];
 
+    const { stars } = useGamification();
+
     return (
-        <nav className="bg-white rounded-2xl shadow-md p-4 mb-6">
+        <nav className="bg-white shadow-md rounded-2xl p-4 mb-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 {/* Logo/Brand */}
                 <div className="flex items-center gap-2">
                     <span className="text-3xl">🎒</span>
-                    <h1 className="text-2xl md:text-3xl font-bold text-primary">
-                        EduQuest
-                    </h1>
+                    <h1 className="text-2xl font-bold text-primary">EduQuest</h1>
                 </div>
 
                 {/* Navigation Items */}
-                <ul className="flex flex-col md:flex-row gap-2 md:gap-4 w-full md:w-auto">
-                    {navItems.map((item, index) => (
-                        <li key={index}>
-                            <a
-                                href="#"
-                                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-bg-soft text-primary font-semibold
-                         hover:bg-primary hover:text-white hover:scale-105 
-                         transition-all duration-200 ease-in-out
-                         justify-center md:justify-start"
-                            >
-                                <span className="text-xl">{item.emoji}</span>
-                                <span>{item.name}</span>
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+                    <a
+                        href="#"
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    >
+                        <span>🏠</span>
+                        <span>Home</span>
+                    </a>
+                    <a
+                        href="#"
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    >
+                        <span>🔢</span>
+                        <span>Math</span>
+                    </a>
+                    <a
+                        href="#"
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    >
+                        <span>🔬</span>
+                        <span>Science</span>
+                    </a>
+                    <a
+                        href="#"
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    >
+                        <span>📜</span>
+                        <span>History</span>
+                    </a>
+                    <a
+                        href="#"
+                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    >
+                        <span>🌍</span>
+                        <span>Geography</span>
+                    </a>
+
+                    {/* Stars Display */}
+                    <StarsDisplay stars={stars} />
+                </div>
             </div>
         </nav>
     );

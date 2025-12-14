@@ -1,11 +1,14 @@
 import Layout from './components/Layout';
-import History from './pages/History';
+import Progress from './pages/Progress';
+import { GamificationProvider } from './context/GamificationContext';
 
 function App() {
   return (
-    <Layout>
-      <History />
-    </Layout>
+    <GamificationProvider>
+      <Layout>
+        <Progress />
+      </Layout>
+    </GamificationProvider>
   );
 }
 
