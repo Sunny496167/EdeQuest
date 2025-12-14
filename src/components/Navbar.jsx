@@ -1,15 +1,14 @@
+import { NavLink } from 'react-router-dom';
 import { useGamification } from '../context/GamificationContext';
 import StarsDisplay from './StarsDisplay';
-function Navbar() {
-    const navItems = [
-        { name: 'Home', emoji: '🏠' },
-        { name: 'Math', emoji: '🔢' },
-        { name: 'Science', emoji: '🔬' },
-        { name: 'History', emoji: '📜' },
-        { name: 'Geography', emoji: '🌍' },
-    ];
 
+function Navbar() {
     const { stars } = useGamification();
+
+    // Scroll to top when navigating
+    const handleClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <nav className="bg-white shadow-md rounded-2xl p-4 mb-6">
@@ -22,41 +21,103 @@ function Navbar() {
 
                 {/* Navigation Items */}
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-                    <a
-                        href="#"
-                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    <NavLink
+                        to="/"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
                     >
                         <span>🏠</span>
                         <span>Home</span>
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    </NavLink>
+
+                    <NavLink
+                        to="/math"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
                     >
-                        <span>🔢</span>
+                        <span>📐</span>
                         <span>Math</span>
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    </NavLink>
+
+                    <NavLink
+                        to="/algebra"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🧮</span>
+                        <span>Algebra</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/science"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
                     >
                         <span>🔬</span>
                         <span>Science</span>
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
-                    >
-                        <span>📜</span>
-                        <span>History</span>
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center gap-2 text-gray-700 hover:text-primary hover:scale-105 transition-all duration-200 font-semibold"
+                    </NavLink>
+
+                    <NavLink
+                        to="/geography"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
                     >
                         <span>🌍</span>
                         <span>Geography</span>
-                    </a>
+                    </NavLink>
+
+                    <NavLink
+                        to="/history"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>⏳</span>
+                        <span>History</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/progress"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-primary text-white scale-105'
+                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🎯</span>
+                        <span>Progress</span>
+                    </NavLink>
 
                     {/* Stars Display */}
                     <StarsDisplay stars={stars} />
