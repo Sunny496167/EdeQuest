@@ -9,6 +9,7 @@ import History from './pages/History';
 import Progress from './pages/Progress';
 import Rewards from './pages/Rewards';
 import Settings from './pages/Settings';
+import ParentDashboard from './pages/ParentDashboard';
 import { GamificationProvider } from './context/GamificationContext';
 import { AccessibilityProvider } from './context/AccessibilityContext';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/progress" element={<Progress />} />
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/parent" element={<ParentDashboard />} />
           </Routes>
         </Layout>
       </GamificationProvider>

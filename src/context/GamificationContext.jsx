@@ -143,6 +143,21 @@ export const GamificationProvider = ({ children }) => {
         return saved ? parseInt(saved, 10) : 0;
     });
 
+    // Time tracking state (in seconds per subject)
+    const [timeSpent, setTimeSpent] = useState(() => {
+        const saved = localStorage.getItem('eduquest_time_spent');
+        return saved ? JSON.parse(saved) : {
+            math: 0,
+            algebra: 0,
+            science: 0,
+            geography: 0,
+            history: 0
+        };
+    });
+
+    // Active tracking intervals
+    const [trackingIntervals] = useState({});
+
     // Check and reset daily goal if new day
     useEffect(() => {
         const today = getTodayDate();
@@ -197,6 +212,11 @@ export const GamificationProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('eduquest_completed_quizzes', completedQuizzes.toString());
     }, [completedQuizzes]);
+
+    // Sync time spent to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_time_spent', JSON.stringify(timeSpent));
+    }, [timeSpent]);
 
     // Add a star
     const addStar = () => {
@@ -371,6 +391,33 @@ export const GamificationProvider = ({ children }) => {
         setCompletedQuizzes(prev => prev + 1);
     };
 
+    // Start tracking time for a subject
+    const startTracking = (subject) => {
+        // Don't start if already tracking
+        if (trackingIntervals[subject]) {
+            return;
+        }
+
+        // Update last active date
+        setLastActiveDate(getTodayDate());
+
+        // Start interval to increment time every second
+        trackingIntervals[subject] = setInterval(() => {
+            setTimeSpent(prev => ({
+                ...prev,
+                [subject]: prev[subject] + 1 // Increment by 1 second
+            }));
+        }, 1000);
+    };
+
+    // Stop tracking time for a subject
+    const stopTracking = (subject) => {
+        if (trackingIntervals[subject]) {
+            clearInterval(trackingIntervals[subject]);
+            delete trackingIntervals[subject];
+        }
+    };
+
     const value = {
         stars,
         badges,
@@ -382,6 +429,7 @@ export const GamificationProvider = ({ children }) => {
         unlockedAvatars,
         selectedAvatar,
         completedQuizzes,
+        timeSpent,
         addStar,
         unlockBadge,
         updateProgress,
@@ -397,7 +445,9 @@ export const GamificationProvider = ({ children }) => {
         unlockAvatar,
         selectAvatar,
         checkRewardConditions,
-        incrementCompletedQuizzes
+        incrementCompletedQuizzes,
+        startTracking,
+        stopTracking
     };
 
     return (
