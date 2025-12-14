@@ -1,8 +1,14 @@
 import SubjectCard from '../components/SubjectCard';
+import DailyGoalCard from '../components/DailyGoalCard';
 
 function Home() {
     return (
         <div className="py-8 md:py-12">
+            {/* Daily Goal Card */}
+            <div className="mb-12">
+                <DailyGoalCard />
+            </div>
+
             {/* Page Title */}
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">

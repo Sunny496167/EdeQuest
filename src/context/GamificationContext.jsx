@@ -72,6 +72,12 @@ const AVAILABLE_BADGES = [
     }
 ];
 
+// Helper function to get today's date in YYYY-MM-DD format
+const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+};
+
 // Gamification Provider Component
 export const GamificationProvider = ({ children }) => {
     // Initialize state from localStorage or defaults
@@ -108,6 +114,29 @@ export const GamificationProvider = ({ children }) => {
         };
     });
 
+    // Daily goal state
+    const [dailyGoalTarget] = useState(10); // Fixed target: 10 questions per day
+
+    const [dailySolvedCount, setDailySolvedCount] = useState(() => {
+        const saved = localStorage.getItem('eduquest_daily_solved');
+        return saved ? parseInt(saved, 10) : 0;
+    });
+
+    const [lastActiveDate, setLastActiveDate] = useState(() => {
+        const saved = localStorage.getItem('eduquest_last_active_date');
+        return saved || getTodayDate();
+    });
+
+    // Check and reset daily goal if new day
+    useEffect(() => {
+        const today = getTodayDate();
+        if (lastActiveDate !== today) {
+            // New day detected, reset daily count
+            setDailySolvedCount(0);
+            setLastActiveDate(today);
+        }
+    }, []); // Run once on mount
+
     // Sync stars to localStorage
     useEffect(() => {
         localStorage.setItem('eduquest_stars', stars.toString());
@@ -127,6 +156,16 @@ export const GamificationProvider = ({ children }) => {
     useEffect(() => {
         localStorage.setItem('eduquest_unlocked_levels', JSON.stringify(unlockedLevels));
     }, [unlockedLevels]);
+
+    // Sync daily solved count to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_daily_solved', dailySolvedCount.toString());
+    }, [dailySolvedCount]);
+
+    // Sync last active date to localStorage
+    useEffect(() => {
+        localStorage.setItem('eduquest_last_active_date', lastActiveDate);
+    }, [lastActiveDate]);
 
     // Add a star
     const addStar = () => {
@@ -207,11 +246,43 @@ export const GamificationProvider = ({ children }) => {
         return unlockedLevels[subject] || ['easy'];
     };
 
+    // Increment daily solved count
+    const incrementDailySolved = () => {
+        const today = getTodayDate();
+
+        // Check if it's a new day
+        if (lastActiveDate !== today) {
+            // Reset for new day
+            setDailySolvedCount(1);
+            setLastActiveDate(today);
+        } else {
+            // Increment for same day
+            setDailySolvedCount(prev => prev + 1);
+        }
+    };
+
+    // Check if daily goal is completed
+    const isDailyGoalCompleted = () => {
+        return dailySolvedCount >= dailyGoalTarget;
+    };
+
+    // Reset daily goal if new day (can be called manually)
+    const resetDailyGoalIfNewDay = () => {
+        const today = getTodayDate();
+        if (lastActiveDate !== today) {
+            setDailySolvedCount(0);
+            setLastActiveDate(today);
+        }
+    };
+
     const value = {
         stars,
         badges,
         progress,
         unlockedLevels,
+        dailyGoalTarget,
+        dailySolvedCount,
+        lastActiveDate,
         addStar,
         unlockBadge,
         updateProgress,
@@ -220,7 +291,10 @@ export const GamificationProvider = ({ children }) => {
         isBadgeUnlocked,
         unlockLevel,
         isLevelUnlocked,
-        getUnlockedLevels
+        getUnlockedLevels,
+        incrementDailySolved,
+        isDailyGoalCompleted,
+        resetDailyGoalIfNewDay
     };
 
     return (

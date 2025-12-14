@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useGamification } from '../context/GamificationContext';
 
 function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', difficulty = 'easy', onComplete }) {
-    const { addStar, incrementProgress, unlockBadge, unlockLevel } = useGamification();
+    const { addStar, incrementProgress, unlockBadge, unlockLevel, incrementDailySolved } = useGamification();
 
     // State management
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -10,8 +10,24 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isAnswered, setIsAnswered] = useState(false);
 
+    // Track if we've already counted this question for daily goal
+    const questionCountedRef = useRef(false);
+
     // Get current question
     const currentQuestion = questions[currentQuestionIndex];
+
+    // Reset questionCounted when moving to next question
+    useEffect(() => {
+        questionCountedRef.current = false;
+    }, [currentQuestionIndex]);
+
+    // Increment daily solved count when question is answered
+    useEffect(() => {
+        if (isAnswered && !questionCountedRef.current) {
+            incrementDailySolved();
+            questionCountedRef.current = true;
+        }
+    }, [isAnswered, incrementDailySolved]);
 
     // Handle option selection
     const handleOptionClick = (option) => {

@@ -3,7 +3,8 @@ import { useGamification } from '../context/GamificationContext';
 import StarsDisplay from './StarsDisplay';
 
 function Navbar() {
-    const { stars } = useGamification();
+    const { stars, isDailyGoalCompleted } = useGamification();
+    const dailyGoalDone = isDailyGoalCompleted();
 
     // Scroll to top when navigating
     const handleClick = () => {
@@ -121,6 +122,14 @@ function Navbar() {
 
                     {/* Stars Display */}
                     <StarsDisplay stars={stars} />
+
+                    {/* Daily Goal Indicator */}
+                    {dailyGoalDone && (
+                        <div className="flex items-center gap-1 text-lg">
+                            <span>🎯</span>
+                            <span>✅</span>
+                        </div>
+                    )}
                 </div>
             </div>
         </nav>
