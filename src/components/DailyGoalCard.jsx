@@ -1,4 +1,8 @@
+import { motion } from 'framer-motion';
 import { useGamification } from '../context/GamificationContext';
+
+// Check if user prefers reduced motion
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function DailyGoalCard() {
     const { dailyGoalTarget, dailySolvedCount, isDailyGoalCompleted } = useGamification();
@@ -15,7 +19,14 @@ function DailyGoalCard() {
                     <span>Daily Goal</span>
                 </h2>
                 {isCompleted && (
-                    <span className="text-3xl animate-bounce">🎉</span>
+                    <motion.span
+                        initial={prefersReducedMotion ? {} : { scale: 0 }}
+                        animate={prefersReducedMotion ? {} : { scale: 1 }}
+                        transition={{ type: 'spring', stiffness: 200, damping: 10 }}
+                        className="text-3xl"
+                    >
+                        🎉
+                    </motion.span>
                 )}
             </div>
 
@@ -27,23 +38,30 @@ function DailyGoalCard() {
             </div>
 
             {/* Progress Bar */}
-            <div className="w-full bg-white rounded-full h-4 mb-4 shadow-inner">
-                <div
-                    className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 h-4 rounded-full transition-all duration-500 ease-out"
-                    style={{ width: `${progressPercentage}%` }}
-                ></div>
+            <div className="w-full bg-white rounded-full h-4 mb-4 shadow-inner overflow-hidden">
+                <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progressPercentage}%` }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 h-4 rounded-full"
+                ></motion.div>
             </div>
 
             {/* Status Message */}
             {isCompleted ? (
-                <div className="bg-white rounded-xl p-4 text-center">
+                <motion.div
+                    initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.9 }}
+                    animate={prefersReducedMotion ? {} : { opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="bg-white rounded-xl p-4 text-center"
+                >
                     <p className="text-xl font-bold text-purple-600">
                         🎊 Awesome! You completed today's goal! 🎊
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
                         Keep up the amazing work!
                     </p>
-                </div>
+                </motion.div>
             ) : (
                 <div className="bg-white rounded-xl p-4 text-center">
                     <p className="text-lg font-semibold text-gray-700">

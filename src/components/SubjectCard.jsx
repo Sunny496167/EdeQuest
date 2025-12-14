@@ -1,9 +1,20 @@
+import { motion } from 'framer-motion';
+
+// Check if user prefers reduced motion
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 function SubjectCard({ title, emoji, description, color, progress = "0% Complete" }) {
+    const MotionComponent = prefersReducedMotion ? 'div' : motion.div;
+
     return (
-        <div
+        <MotionComponent
+            initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
+            animate={prefersReducedMotion ? {} : { opacity: 1, scale: 1 }}
+            whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
             className={`${color} rounded-2xl p-6 shadow-md 
-                  hover:shadow-lg hover:scale-105 
-                  transition-all duration-300 
+                  hover:shadow-lg
+                  transition-shadow duration-300 
                   cursor-pointer`}
         >
             {/* Emoji Icon */}
@@ -36,7 +47,7 @@ function SubjectCard({ title, emoji, description, color, progress = "0% Complete
                     ></div>
                 </div>
             </div>
-        </div>
+        </MotionComponent>
     );
 }
 
