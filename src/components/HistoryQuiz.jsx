@@ -47,13 +47,13 @@ function HistoryQuiz({ quiz }) {
                     <span className="text-sm font-semibold text-gray-600">
                         Question {currentQuestionIndex + 1} of {quiz.length}
                     </span>
-                    <span className="text-sm font-bold text-primary">
+                    <span className="text-sm font-bold text-violet-600">
                         Time Traveler! ⏳
                     </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
                     <div
-                        className="bg-primary h-3 rounded-full transition-all duration-300"
+                        className="bg-violet-600 h-3 rounded-full transition-all duration-300"
                         style={{ width: `${((currentQuestionIndex + 1) / quiz.length) * 100}%` }}
                     ></div>
                 </div>
@@ -95,7 +95,7 @@ function HistoryQuiz({ quiz }) {
                           p-5 rounded-xl text-lg font-semibold text-gray-800
                           transition-all duration-200
                           ${!isAnswered ? 'hover:scale-105 hover:shadow-lg cursor-pointer' : 'cursor-not-allowed'}
-                          ${isSelected ? 'ring-4 ring-primary' : ''}
+                          ${isSelected ? 'ring-4 ring-violet-600' : ''}
                           shadow-md border-2 border-amber-300`}
                             >
                                 {option}
@@ -107,10 +107,10 @@ function HistoryQuiz({ quiz }) {
                 {/* Feedback Message */}
                 {feedback && (
                     <div className={`text-center mb-6 p-4 rounded-xl ${feedback.includes('Excellent')
-                            ? 'bg-green-100 text-green-800'
-                            : feedback.includes('Not quite')
-                                ? 'bg-yellow-100 text-yellow-800'
-                                : 'bg-purple-100 text-purple-800'
+                        ? 'bg-green-100 text-green-800'
+                        : feedback.includes('Not quite')
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-purple-100 text-purple-800'
                         }`}>
                         <p className="text-xl font-bold">{feedback}</p>
                     </div>
@@ -121,7 +121,7 @@ function HistoryQuiz({ quiz }) {
                     <div className="text-center">
                         <button
                             onClick={handleNextQuestion}
-                            className="bg-primary text-white px-8 py-4 rounded-xl text-xl font-bold
+                            className="bg-violet-600 text-white px-8 py-4 rounded-xl text-xl font-bold
                        hover:bg-purple-700 hover:scale-105 transition-all duration-200 shadow-lg"
                         >
                             Next Question ➡️

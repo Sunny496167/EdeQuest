@@ -17,7 +17,7 @@ function Navbar() {
                 {/* Logo/Brand */}
                 <div className="flex items-center gap-2">
                     <span className="text-3xl">🎒</span>
-                    <h1 className="text-2xl font-bold text-primary">EduQuest</h1>
+                    <h1 className="text-2xl font-bold text-violet-600">EduQuest</h1>
                 </div>
 
                 {/* Navigation Items */}
@@ -27,8 +27,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -41,8 +41,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -55,8 +55,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -69,8 +69,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -83,8 +83,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -97,8 +97,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -111,8 +111,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >
@@ -125,8 +125,8 @@ function Navbar() {
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-primary text-white scale-105'
-                                : 'text-gray-700 hover:text-primary hover:scale-105'
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
                             }`
                         }
                     >

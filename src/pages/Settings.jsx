@@ -7,7 +7,7 @@ function Settings() {
                 {/* Page Title */}
                 <div className="text-center mb-12">
                     <div className="text-6xl mb-4">⚙️</div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                    <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         Settings
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-700 font-semibold">

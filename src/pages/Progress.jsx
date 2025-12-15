@@ -22,7 +22,7 @@ function Progress() {
             <div className="max-w-6xl mx-auto">
                 {/* Page Title */}
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                    <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         Your Progress 🎯
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-700 font-semibold">
@@ -47,7 +47,7 @@ function Progress() {
                         <h2 className="text-3xl font-bold text-gray-800">
                             Badges 🏆
                         </h2>
-                        <span className="text-lg font-semibold text-primary">
+                        <span className="text-lg font-semibold text-violet-600">
                             {unlockedCount} / {allBadges.length} Unlocked
                         </span>
                     </div>

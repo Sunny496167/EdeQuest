@@ -9,7 +9,7 @@ function AvatarCard({ avatar, isUnlocked, isSelected, onSelect }) {
                     ? 'bg-gradient-to-br from-purple-100 to-pink-100 hover:from-purple-200 hover:to-pink-200 hover:scale-105 hover:shadow-lg cursor-pointer'
                     : 'bg-gray-200 opacity-50 cursor-not-allowed'
                 }
-        ${isSelected ? 'ring-4 ring-primary scale-105 shadow-xl' : 'shadow-md'}
+        ${isSelected ? 'ring-4 ring-violet-600 scale-105 shadow-xl' : 'shadow-md'}
       `}
         >
             {/* Avatar Emoji */}
@@ -25,7 +25,7 @@ function AvatarCard({ avatar, isUnlocked, isSelected, onSelect }) {
             {/* Status */}
             {isUnlocked ? (
                 isSelected ? (
-                    <div className="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <div className="bg-violet-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                         SELECTED
                     </div>
                 ) : (

@@ -11,7 +11,7 @@ function Home() {
 
             {/* Page Title */}
             <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                     Choose Your Adventure 🎯
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-600 font-semibold">
@@ -60,7 +60,7 @@ function Home() {
 
             {/* Motivational Section */}
             <div className="mt-16 text-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 rounded-2xl p-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3">
+                <h2 className="text-2xl md:text-3xl font-bold text-violet-600 mb-3">
                     Ready to Start Learning? 🚀
                 </h2>
                 <p className="text-lg text-gray-700">

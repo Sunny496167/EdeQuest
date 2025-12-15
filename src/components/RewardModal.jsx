@@ -35,7 +35,7 @@ function RewardModal({ reward, onClose }) {
                         className="text-center mb-6"
                     >
                         <div className="text-6xl mb-4">🎉</div>
-                        <h2 className="text-3xl font-bold text-primary mb-2">
+                        <h2 className="text-3xl font-bold text-violet-600 mb-2">
                             Congratulations!
                         </h2>
                         <p className="text-xl text-gray-700 font-semibold">
@@ -78,7 +78,7 @@ function RewardModal({ reward, onClose }) {
                         whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
                         whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
                         onClick={onClose}
-                        className="w-full bg-primary text-white px-6 py-4 rounded-xl text-xl font-bold
+                        className="w-full bg-violet-600 text-white px-6 py-4 rounded-xl text-xl font-bold
                      hover:bg-purple-700 transition-colors duration-200 shadow-lg"
                     >
                         Awesome! ✨

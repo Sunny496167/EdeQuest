@@ -117,7 +117,7 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                 {/* Quiz Header */}
                 <div className="text-center mb-12">
                     <div className="text-6xl mb-4">{emoji}</div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                    <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         {title}
                     </h1>
                     {subtitle && (
@@ -133,13 +133,13 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                         <span className="text-sm font-semibold text-gray-600">
                             Question {currentQuestionIndex + 1} of {questions.length}
                         </span>
-                        <span className="text-sm font-bold text-primary">
+                        <span className="text-sm font-bold text-violet-600">
                             You're doing great! 🌟
                         </span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-3">
                         <div
-                            className="bg-primary h-3 rounded-full transition-all duration-300"
+                            className="bg-violet-600 h-3 rounded-full transition-all duration-300"
                             style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
                         ></div>
                     </div>
@@ -181,7 +181,7 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                             p-5 rounded-xl text-lg font-semibold text-gray-800
                             transition-all duration-200
                             ${!isAnswered ? 'hover:scale-105 hover:shadow-lg cursor-pointer' : 'cursor-not-allowed'}
-                            ${isSelected ? 'ring-4 ring-primary' : ''}
+                            ${isSelected ? 'ring-4 ring-violet-600' : ''}
                             shadow-md`}
                                 >
                                     {option}
@@ -207,7 +207,7 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                         <div className="text-center">
                             <button
                                 onClick={handleNextQuestion}
-                                className="bg-primary text-white px-8 py-4 rounded-xl text-xl font-bold
+                                className="bg-violet-600 text-white px-8 py-4 rounded-xl text-xl font-bold
                          hover:bg-purple-700 hover:scale-105 transition-all duration-200 shadow-lg"
                             >
                                 Next Question ➡️
@@ -220,7 +220,7 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                         <div className="text-center">
                             <button
                                 onClick={handleRestart}
-                                className="bg-accent text-gray-800 px-8 py-4 rounded-xl text-xl font-bold
+                                className="bg-yellow-400 text-gray-800 px-8 py-4 rounded-xl text-xl font-bold
                          hover:bg-yellow-400 hover:scale-105 transition-all duration-200 shadow-lg"
                             >
                                 Retake Quiz 🔄

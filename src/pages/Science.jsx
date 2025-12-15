@@ -38,7 +38,7 @@ function Science() {
             <div className="max-w-6xl mx-auto">
                 {/* Page Title */}
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                    <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         Science Lab 🔬
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-700 font-semibold">
@@ -113,7 +113,7 @@ function Science() {
                 <div className="mt-12 text-center">
                     <button
                         onClick={() => setShowQuiz(true)}
-                        className="bg-primary text-white px-8 py-4 rounded-xl text-xl font-bold
+                        className="bg-violet-600 text-white px-8 py-4 rounded-xl text-xl font-bold
                      hover:bg-purple-700 hover:scale-105 transition-all duration-200 shadow-lg"
                     >
                         Take the Quiz! 📝

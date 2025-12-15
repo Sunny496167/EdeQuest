@@ -45,7 +45,7 @@ function DifficultySelector({ selectedLevel, unlockedLevels, onSelect, subject }
                                     ? `bg-gradient-to-br ${level.color} ${level.hoverColor} hover:scale-105 hover:shadow-lg cursor-pointer`
                                     : 'bg-gray-200 opacity-50 cursor-not-allowed'
                                 }
-                ${isSelected ? 'ring-4 ring-primary scale-105' : ''}
+                ${isSelected ? 'ring-4 ring-violet-600 scale-105' : ''}
                 shadow-md
               `}
                         >
@@ -72,7 +72,7 @@ function DifficultySelector({ selectedLevel, unlockedLevels, onSelect, subject }
 
                             {/* Selected Indicator */}
                             {isSelected && (
-                                <div className="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                                <div className="absolute top-2 right-2 bg-violet-600 text-white text-xs font-bold px-2 py-1 rounded-full">
                                     SELECTED
                                 </div>
                             )}

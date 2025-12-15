@@ -29,7 +29,7 @@ function Geography() {
             <div className="max-w-6xl mx-auto">
                 {/* Page Title */}
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                    <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         Geography World 🌍
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-700 font-semibold">
@@ -56,7 +56,7 @@ function Geography() {
                 </section>
 
                 {/* Divider */}
-                <div className="border-t-4 border-primary rounded-full mb-16"></div>
+                <div className="border-t-4 border-violet-600 rounded-full mb-16"></div>
 
                 {/* Flags Learning Section */}
                 <section className="mb-16">
@@ -85,7 +85,7 @@ function Geography() {
                 </section>
 
                 {/* Divider */}
-                <div className="border-t-4 border-primary rounded-full mb-16"></div>
+                <div className="border-t-4 border-violet-600 rounded-full mb-16"></div>
 
                 {/* Guess the Country Game */}
                 <section className="mb-12">

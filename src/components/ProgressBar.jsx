@@ -7,7 +7,7 @@ function ProgressBar({ subject, percentage, emoji }) {
                     <span className="text-3xl">{emoji}</span>
                     <h3 className="text-xl font-bold text-gray-800">{subject}</h3>
                 </div>
-                <span className="text-lg font-bold text-primary">{percentage}%</span>
+                <span className="text-lg font-bold text-violet-600">{percentage}%</span>
             </div>
 
             {/* Progress Bar */}
