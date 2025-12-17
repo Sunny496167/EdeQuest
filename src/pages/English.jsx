@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
+import PronunciationButton from '../components/PronunciationButton';
 import englishQuestions from '../data/englishQuestions';
 import { englishAlphabet, popularWords, dailyPhrases } from '../data/englishContent';
 
@@ -48,8 +49,8 @@ function English() {
                     <button
                         onClick={() => setActiveTab('alphabet')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet'
-                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         📝 Alphabet (A-Z)
@@ -57,8 +58,8 @@ function English() {
                     <button
                         onClick={() => setActiveTab('words')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'words'
-                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         📚 Popular Words
@@ -66,8 +67,8 @@ function English() {
                     <button
                         onClick={() => setActiveTab('phrases')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'phrases'
-                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         💬 Daily Phrases
@@ -75,8 +76,8 @@ function English() {
                     <button
                         onClick={() => setActiveTab('quiz')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'quiz'
-                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         🎯 Take Quiz
@@ -94,8 +95,8 @@ function English() {
                                 <div
                                     key={item.letter}
                                     className={`rounded-xl p-4 hover:shadow-lg transition-all duration-300 hover:scale-105 ${item.type === 'vowel'
-                                            ? 'bg-gradient-to-br from-purple-100 to-pink-100'
-                                            : 'bg-gradient-to-br from-blue-100 to-indigo-100'
+                                        ? 'bg-gradient-to-br from-purple-100 to-pink-100'
+                                        : 'bg-gradient-to-br from-blue-100 to-indigo-100'
                                         }`}
                                 >
                                     <div className={`text-5xl font-bold mb-2 text-center ${item.type === 'vowel' ? 'text-purple-600' : 'text-indigo-600'
@@ -142,9 +143,12 @@ function English() {
                                         <div className="text-2xl font-bold text-indigo-600">
                                             {word.word}
                                         </div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
-                                            {word.category}
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={word.word} language="en-US" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
+                                                {word.category}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-2">
                                         {word.meaning}
@@ -174,9 +178,12 @@ function English() {
                                         <div className="text-xl font-bold text-blue-600 flex-1">
                                             {phrase.phrase}
                                         </div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
-                                            {phrase.category}
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={phrase.phrase} language="en-US" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
+                                                {phrase.category}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-2">
                                         <strong>Usage:</strong> {phrase.usage}

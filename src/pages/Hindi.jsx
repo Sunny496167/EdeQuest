@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
+import PronunciationButton from '../components/PronunciationButton';
 import hindiQuestions from '../data/hindiQuestions';
 import { hindiAlphabet, popularWords, dailyPhrases } from '../data/hindiContent';
 
@@ -48,8 +49,8 @@ function Hindi() {
                     <button
                         onClick={() => setActiveTab('alphabet')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet'
-                                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         📝 Devanagari Alphabet
@@ -57,8 +58,8 @@ function Hindi() {
                     <button
                         onClick={() => setActiveTab('words')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'words'
-                                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         📚 Popular Words
@@ -66,8 +67,8 @@ function Hindi() {
                     <button
                         onClick={() => setActiveTab('phrases')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'phrases'
-                                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         💬 Daily Phrases
@@ -75,8 +76,8 @@ function Hindi() {
                     <button
                         onClick={() => setActiveTab('quiz')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'quiz'
-                                ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         🎯 Take Quiz
@@ -151,12 +152,11 @@ function Hindi() {
                                     className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="flex justify-between items-start mb-2">
-                                        <div className="text-2xl font-bold text-orange-600">
-                                            {word.hindi}
+                                        <div className="text-2xl font-bold text-orange-600">{word.hindi}</div>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={word.hindi} language="hi-IN" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">{word.category}</span>
                                         </div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
-                                            {word.category}
-                                        </span>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-1 italic">
                                         {word.romanization}
@@ -186,9 +186,12 @@ function Hindi() {
                                         <div className="text-xl font-bold text-green-600 flex-1">
                                             {phrase.hindi}
                                         </div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
-                                            {phrase.category}
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={phrase.hindi} language="hi-IN" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
+                                                {phrase.category}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-2 italic">
                                         {phrase.romanization}

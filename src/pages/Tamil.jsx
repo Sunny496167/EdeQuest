@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
+import PronunciationButton from '../components/PronunciationButton';
 import tamilQuestions from '../data/tamilQuestions';
 import { tamilAlphabet, popularWords, dailyPhrases } from '../data/tamilContent';
 
@@ -95,7 +96,10 @@ function Tamil() {
                                 <div key={index} className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300">
                                     <div className="flex justify-between items-start mb-2">
                                         <div className="text-2xl font-bold text-red-600">{word.tamil}</div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">{word.category}</span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={word.tamil} language="ta-IN" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">{word.category}</span>
+                                        </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-1 italic">{word.romanization}</div>
                                     <div className="text-lg text-gray-700 font-semibold">{word.english}</div>
@@ -113,7 +117,10 @@ function Tamil() {
                                 <div key={index} className="bg-gradient-to-br from-orange-100 to-red-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300">
                                     <div className="flex justify-between items-start mb-3">
                                         <div className="text-xl font-bold text-orange-600 flex-1">{phrase.tamil}</div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">{phrase.category}</span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={phrase.tamil} language="ta-IN" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">{phrase.category}</span>
+                                        </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-2 italic">{phrase.romanization}</div>
                                     <div className="text-lg text-gray-700 font-semibold">{phrase.english}</div>

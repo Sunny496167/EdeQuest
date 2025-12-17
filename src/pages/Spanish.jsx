@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
+import PronunciationButton from '../components/PronunciationButton';
 import spanishQuestions from '../data/spanishQuestions';
 import { spanishAlphabet, popularWords, dailyPhrases } from '../data/spanishContent';
 
@@ -48,8 +49,8 @@ function Spanish() {
                     <button
                         onClick={() => setActiveTab('alphabet')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet'
-                                ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         📝 Alphabet
@@ -57,8 +58,8 @@ function Spanish() {
                     <button
                         onClick={() => setActiveTab('words')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'words'
-                                ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         📚 Popular Words
@@ -66,8 +67,8 @@ function Spanish() {
                     <button
                         onClick={() => setActiveTab('phrases')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'phrases'
-                                ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         💬 Daily Phrases
@@ -75,8 +76,8 @@ function Spanish() {
                     <button
                         onClick={() => setActiveTab('quiz')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'quiz'
-                                ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-lg'
+                            : 'bg-white text-gray-700 hover:bg-gray-100'
                             }`}
                     >
                         🎯 Take Quiz
@@ -126,9 +127,12 @@ function Spanish() {
                                         <div className="text-2xl font-bold text-violet-600">
                                             {word.spanish}
                                         </div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
-                                            {word.category}
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={word.spanish} language="es-ES" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
+                                                {word.category}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="text-lg text-gray-700">
                                         {word.english}
@@ -155,9 +159,12 @@ function Spanish() {
                                         <div className="text-xl font-bold text-violet-600 flex-1">
                                             {phrase.spanish}
                                         </div>
-                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
-                                            {phrase.category}
-                                        </span>
+                                        <div className="flex items-center gap-2">
+                                            <PronunciationButton text={phrase.spanish} language="es-ES" label="🔊" />
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
+                                                {phrase.category}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div className="text-lg text-gray-700">
                                         {phrase.english}
