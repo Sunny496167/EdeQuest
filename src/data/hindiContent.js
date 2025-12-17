@@ -1,0 +1,305 @@
+// Hindi Language Learning Content
+// Comprehensive Hindi learning with Devanagari alphabet, vocabulary, phrases, and more
+
+export const hindiAlphabet = {
+    vowels: [
+        { devanagari: 'अ', romanization: 'a', pronunciation: 'uh', example: 'अनार (Anaar - Pomegranate)' },
+        { devanagari: 'आ', romanization: 'aa', pronunciation: 'ah', example: 'आम (Aam - Mango)' },
+        { devanagari: 'इ', romanization: 'i', pronunciation: 'i', example: 'इमली (Imli - Tamarind)' },
+        { devanagari: 'ई', romanization: 'ee', pronunciation: 'ee', example: 'ईख (Eekh - Sugarcane)' },
+        { devanagari: 'उ', romanization: 'u', pronunciation: 'u', example: 'उल्लू (Ullu - Owl)' },
+        { devanagari: 'ऊ', romanization: 'oo', pronunciation: 'oo', example: 'ऊन (Oon - Wool)' },
+        { devanagari: 'ए', romanization: 'e', pronunciation: 'ay', example: 'एक (Ek - One)' },
+        { devanagari: 'ऐ', romanization: 'ai', pronunciation: 'ai', example: 'ऐनक (Ainak - Glasses)' },
+        { devanagari: 'ओ', romanization: 'o', pronunciation: 'oh', example: 'ओस (Os - Dew)' },
+        { devanagari: 'औ', romanization: 'au', pronunciation: 'ow', example: 'औरत (Aurat - Woman)' },
+        { devanagari: 'अं', romanization: 'am', pronunciation: 'um', example: 'अंगूर (Angoor - Grapes)' },
+        { devanagari: 'अः', romanization: 'ah', pronunciation: 'ah', example: 'दुःख (Dukh - Sorrow)' }
+    ],
+    consonants: [
+        { devanagari: 'क', romanization: 'ka', pronunciation: 'kuh', example: 'कमल (Kamal - Lotus)' },
+        { devanagari: 'ख', romanization: 'kha', pronunciation: 'khuh', example: 'खरगोश (Khargosh - Rabbit)' },
+        { devanagari: 'ग', romanization: 'ga', pronunciation: 'guh', example: 'गाय (Gaay - Cow)' },
+        { devanagari: 'घ', romanization: 'gha', pronunciation: 'ghuh', example: 'घर (Ghar - House)' },
+        { devanagari: 'च', romanization: 'cha', pronunciation: 'chuh', example: 'चाय (Chaay - Tea)' },
+        { devanagari: 'छ', romanization: 'chha', pronunciation: 'chhuh', example: 'छत (Chhat - Roof)' },
+        { devanagari: 'ज', romanization: 'ja', pronunciation: 'juh', example: 'जल (Jal - Water)' },
+        { devanagari: 'झ', romanization: 'jha', pronunciation: 'jhuh', example: 'झंडा (Jhanda - Flag)' },
+        { devanagari: 'ट', romanization: 'ta', pronunciation: 'tuh', example: 'टमाटर (Tamatar - Tomato)' },
+        { devanagari: 'ठ', romanization: 'tha', pronunciation: 'thuh', example: 'ठंडा (Thanda - Cold)' },
+        { devanagari: 'ड', romanization: 'da', pronunciation: 'duh', example: 'डाकिया (Dakiya - Postman)' },
+        { devanagari: 'ढ', romanization: 'dha', pronunciation: 'dhuh', example: 'ढोल (Dhol - Drum)' },
+        { devanagari: 'ण', romanization: 'na', pronunciation: 'nuh', example: 'गण (Gan - Group)' },
+        { devanagari: 'त', romanization: 'ta', pronunciation: 'tuh', example: 'तारा (Tara - Star)' },
+        { devanagari: 'थ', romanization: 'tha', pronunciation: 'thuh', example: 'थैला (Thaila - Bag)' },
+        { devanagari: 'द', romanization: 'da', pronunciation: 'duh', example: 'दवा (Dawa - Medicine)' },
+        { devanagari: 'ध', romanization: 'dha', pronunciation: 'dhuh', example: 'धन (Dhan - Wealth)' },
+        { devanagari: 'न', romanization: 'na', pronunciation: 'nuh', example: 'नमक (Namak - Salt)' },
+        { devanagari: 'प', romanization: 'pa', pronunciation: 'puh', example: 'पानी (Paani - Water)' },
+        { devanagari: 'फ', romanization: 'pha', pronunciation: 'phuh', example: 'फल (Phal - Fruit)' },
+        { devanagari: 'ब', romanization: 'ba', pronunciation: 'buh', example: 'बच्चा (Bachcha - Child)' },
+        { devanagari: 'भ', romanization: 'bha', pronunciation: 'bhuh', example: 'भालू (Bhaalu - Bear)' },
+        { devanagari: 'म', romanization: 'ma', pronunciation: 'muh', example: 'माता (Mata - Mother)' },
+        { devanagari: 'य', romanization: 'ya', pronunciation: 'yuh', example: 'यज्ञ (Yagya - Ritual)' },
+        { devanagari: 'र', romanization: 'ra', pronunciation: 'ruh', example: 'रात (Raat - Night)' },
+        { devanagari: 'ल', romanization: 'la', pronunciation: 'luh', example: 'लड़का (Ladka - Boy)' },
+        { devanagari: 'व', romanization: 'va', pronunciation: 'vuh', example: 'वन (Van - Forest)' },
+        { devanagari: 'श', romanization: 'sha', pronunciation: 'shuh', example: 'शेर (Sher - Lion)' },
+        { devanagari: 'ष', romanization: 'sha', pronunciation: 'shuh', example: 'षट् (Shat - Six)' },
+        { devanagari: 'स', romanization: 'sa', pronunciation: 'suh', example: 'सूरज (Suraj - Sun)' },
+        { devanagari: 'ह', romanization: 'ha', pronunciation: 'huh', example: 'हाथी (Haathi - Elephant)' },
+        { devanagari: 'क्ष', romanization: 'ksha', pronunciation: 'kshuh', example: 'क्षमा (Kshama - Forgiveness)' },
+        { devanagari: 'त्र', romanization: 'tra', pronunciation: 'truh', example: 'त्रिशूल (Trishul - Trident)' },
+        { devanagari: 'ज्ञ', romanization: 'gya', pronunciation: 'gyuh', example: 'ज्ञान (Gyaan - Knowledge)' }
+    ]
+};
+
+export const popularWords = [
+    // Greetings & Basic (1-10)
+    { hindi: 'नमस्ते', romanization: 'Namaste', english: 'Hello/Greetings', category: 'Greetings' },
+    { hindi: 'धन्यवाद', romanization: 'Dhanyavaad', english: 'Thank you', category: 'Greetings' },
+    { hindi: 'कृपया', romanization: 'Kripya', english: 'Please', category: 'Greetings' },
+    { hindi: 'हाँ', romanization: 'Haan', english: 'Yes', category: 'Basic' },
+    { hindi: 'नहीं', romanization: 'Nahin', english: 'No', category: 'Basic' },
+    { hindi: 'माफ़ करें', romanization: 'Maaf karen', english: 'Sorry/Excuse me', category: 'Greetings' },
+    { hindi: 'अलविदा', romanization: 'Alvida', english: 'Goodbye', category: 'Greetings' },
+    { hindi: 'शुभ प्रभात', romanization: 'Shubh prabhat', english: 'Good morning', category: 'Greetings' },
+    { hindi: 'शुभ रात्रि', romanization: 'Shubh raatri', english: 'Good night', category: 'Greetings' },
+    { hindi: 'स्वागत', romanization: 'Swaagat', english: 'Welcome', category: 'Greetings' },
+
+    // Numbers (11-20)
+    { hindi: 'एक', romanization: 'Ek', english: 'One', category: 'Numbers' },
+    { hindi: 'दो', romanization: 'Do', english: 'Two', category: 'Numbers' },
+    { hindi: 'तीन', romanization: 'Teen', english: 'Three', category: 'Numbers' },
+    { hindi: 'चार', romanization: 'Chaar', english: 'Four', category: 'Numbers' },
+    { hindi: 'पाँच', romanization: 'Paanch', english: 'Five', category: 'Numbers' },
+    { hindi: 'छह', romanization: 'Chhah', english: 'Six', category: 'Numbers' },
+    { hindi: 'सात', romanization: 'Saat', english: 'Seven', category: 'Numbers' },
+    { hindi: 'आठ', romanization: 'Aath', english: 'Eight', category: 'Numbers' },
+    { hindi: 'नौ', romanization: 'Nau', english: 'Nine', category: 'Numbers' },
+    { hindi: 'दस', romanization: 'Das', english: 'Ten', category: 'Numbers' },
+
+    // Family (21-30)
+    { hindi: 'परिवार', romanization: 'Parivaar', english: 'Family', category: 'Family' },
+    { hindi: 'माता', romanization: 'Mata', english: 'Mother', category: 'Family' },
+    { hindi: 'पिता', romanization: 'Pita', english: 'Father', category: 'Family' },
+    { hindi: 'भाई', romanization: 'Bhai', english: 'Brother', category: 'Family' },
+    { hindi: 'बहन', romanization: 'Bahan', english: 'Sister', category: 'Family' },
+    { hindi: 'बेटा', romanization: 'Beta', english: 'Son', category: 'Family' },
+    { hindi: 'बेटी', romanization: 'Beti', english: 'Daughter', category: 'Family' },
+    { hindi: 'दादा', romanization: 'Dada', english: 'Grandfather (paternal)', category: 'Family' },
+    { hindi: 'दादी', romanization: 'Dadi', english: 'Grandmother (paternal)', category: 'Family' },
+    { hindi: 'बच्चा', romanization: 'Bachcha', english: 'Child', category: 'Family' },
+
+    // Colors (31-40)
+    { hindi: 'लाल', romanization: 'Laal', english: 'Red', category: 'Colors' },
+    { hindi: 'नीला', romanization: 'Neela', english: 'Blue', category: 'Colors' },
+    { hindi: 'हरा', romanization: 'Hara', english: 'Green', category: 'Colors' },
+    { hindi: 'पीला', romanization: 'Peela', english: 'Yellow', category: 'Colors' },
+    { hindi: 'काला', romanization: 'Kaala', english: 'Black', category: 'Colors' },
+    { hindi: 'सफ़ेद', romanization: 'Safed', english: 'White', category: 'Colors' },
+    { hindi: 'नारंगी', romanization: 'Naarangi', english: 'Orange', category: 'Colors' },
+    { hindi: 'गुलाबी', romanization: 'Gulaabi', english: 'Pink', category: 'Colors' },
+    { hindi: 'बैंगनी', romanization: 'Baingani', english: 'Purple', category: 'Colors' },
+    { hindi: 'भूरा', romanization: 'Bhoora', english: 'Brown', category: 'Colors' },
+
+    // Food (41-50)
+    { hindi: 'पानी', romanization: 'Paani', english: 'Water', category: 'Food' },
+    { hindi: 'रोटी', romanization: 'Roti', english: 'Bread', category: 'Food' },
+    { hindi: 'दूध', romanization: 'Doodh', english: 'Milk', category: 'Food' },
+    { hindi: 'चाय', romanization: 'Chaay', english: 'Tea', category: 'Food' },
+    { hindi: 'चावल', romanization: 'Chaawal', english: 'Rice', category: 'Food' },
+    { hindi: 'फल', romanization: 'Phal', english: 'Fruit', category: 'Food' },
+    { hindi: 'सेब', romanization: 'Seb', english: 'Apple', category: 'Food' },
+    { hindi: 'आम', romanization: 'Aam', english: 'Mango', category: 'Food' },
+    { hindi: 'खाना', romanization: 'Khaana', english: 'Food', category: 'Food' },
+    { hindi: 'मिठाई', romanization: 'Mithaai', english: 'Sweet', category: 'Food' },
+
+    // Common Objects (51-60)
+    { hindi: 'घर', romanization: 'Ghar', english: 'House', category: 'Objects' },
+    { hindi: 'किताब', romanization: 'Kitaab', english: 'Book', category: 'Objects' },
+    { hindi: 'मेज़', romanization: 'Mez', english: 'Table', category: 'Objects' },
+    { hindi: 'कुर्सी', romanization: 'Kursi', english: 'Chair', category: 'Objects' },
+    { hindi: 'दरवाज़ा', romanization: 'Darwaaza', english: 'Door', category: 'Objects' },
+    { hindi: 'खिड़की', romanization: 'Khidki', english: 'Window', category: 'Objects' },
+    { hindi: 'गाड़ी', romanization: 'Gaadi', english: 'Car', category: 'Objects' },
+    { hindi: 'फ़ोन', romanization: 'Phone', english: 'Phone', category: 'Objects' },
+    { hindi: 'कंप्यूटर', romanization: 'Computer', english: 'Computer', category: 'Objects' },
+    { hindi: 'घड़ी', romanization: 'Ghadi', english: 'Clock/Watch', category: 'Objects' },
+
+    // Nature (61-70)
+    { hindi: 'सूरज', romanization: 'Suraj', english: 'Sun', category: 'Nature' },
+    { hindi: 'चाँद', romanization: 'Chaand', english: 'Moon', category: 'Nature' },
+    { hindi: 'तारा', romanization: 'Tara', english: 'Star', category: 'Nature' },
+    { hindi: 'पेड़', romanization: 'Ped', english: 'Tree', category: 'Nature' },
+    { hindi: 'फूल', romanization: 'Phool', english: 'Flower', category: 'Nature' },
+    { hindi: 'नदी', romanization: 'Nadi', english: 'River', category: 'Nature' },
+    { hindi: 'पहाड़', romanization: 'Pahaad', english: 'Mountain', category: 'Nature' },
+    { hindi: 'आसमान', romanization: 'Aasmaan', english: 'Sky', category: 'Nature' },
+    { hindi: 'समुद्र', romanization: 'Samudra', english: 'Ocean', category: 'Nature' },
+    { hindi: 'बारिश', romanization: 'Baarish', english: 'Rain', category: 'Nature' },
+
+    // Animals (71-80)
+    { hindi: 'कुत्ता', romanization: 'Kutta', english: 'Dog', category: 'Animals' },
+    { hindi: 'बिल्ली', romanization: 'Billi', english: 'Cat', category: 'Animals' },
+    { hindi: 'पक्षी', romanization: 'Pakshi', english: 'Bird', category: 'Animals' },
+    { hindi: 'मछली', romanization: 'Machhli', english: 'Fish', category: 'Animals' },
+    { hindi: 'घोड़ा', romanization: 'Ghoda', english: 'Horse', category: 'Animals' },
+    { hindi: 'गाय', romanization: 'Gaay', english: 'Cow', category: 'Animals' },
+    { hindi: 'हाथी', romanization: 'Haathi', english: 'Elephant', category: 'Animals' },
+    { hindi: 'शेर', romanization: 'Sher', english: 'Lion', category: 'Animals' },
+    { hindi: 'बाघ', romanization: 'Baagh', english: 'Tiger', category: 'Animals' },
+    { hindi: 'खरगोश', romanization: 'Khargosh', english: 'Rabbit', category: 'Animals' },
+
+    // Time & Days (81-90)
+    { hindi: 'आज', romanization: 'Aaj', english: 'Today', category: 'Time' },
+    { hindi: 'कल', romanization: 'Kal', english: 'Tomorrow/Yesterday', category: 'Time' },
+    { hindi: 'दिन', romanization: 'Din', english: 'Day', category: 'Time' },
+    { hindi: 'रात', romanization: 'Raat', english: 'Night', category: 'Time' },
+    { hindi: 'सुबह', romanization: 'Subah', english: 'Morning', category: 'Time' },
+    { hindi: 'शाम', romanization: 'Shaam', english: 'Evening', category: 'Time' },
+    { hindi: 'सप्ताह', romanization: 'Saptaah', english: 'Week', category: 'Time' },
+    { hindi: 'महीना', romanization: 'Maheena', english: 'Month', category: 'Time' },
+    { hindi: 'साल', romanization: 'Saal', english: 'Year', category: 'Time' },
+    { hindi: 'समय', romanization: 'Samay', english: 'Time', category: 'Time' },
+
+    // Common Verbs (91-100)
+    { hindi: 'होना', romanization: 'Hona', english: 'To be', category: 'Verbs' },
+    { hindi: 'करना', romanization: 'Karna', english: 'To do', category: 'Verbs' },
+    { hindi: 'जाना', romanization: 'Jaana', english: 'To go', category: 'Verbs' },
+    { hindi: 'आना', romanization: 'Aana', english: 'To come', category: 'Verbs' },
+    { hindi: 'खाना', romanization: 'Khaana', english: 'To eat', category: 'Verbs' },
+    { hindi: 'पीना', romanization: 'Peena', english: 'To drink', category: 'Verbs' },
+    { hindi: 'बोलना', romanization: 'Bolna', english: 'To speak', category: 'Verbs' },
+    { hindi: 'सुनना', romanization: 'Sunna', english: 'To listen', category: 'Verbs' },
+    { hindi: 'देखना', romanization: 'Dekhna', english: 'To see', category: 'Verbs' },
+    { hindi: 'पढ़ना', romanization: 'Padhna', english: 'To read', category: 'Verbs' }
+];
+
+export const dailyPhrases = [
+    // Greetings & Introductions (1-10)
+    { hindi: 'आप कैसे हैं?', romanization: 'Aap kaise hain?', english: 'How are you?', category: 'Greetings' },
+    { hindi: 'मैं ठीक हूँ', romanization: 'Main theek hoon', english: 'I am fine', category: 'Greetings' },
+    { hindi: 'मेरा नाम... है', romanization: 'Mera naam... hai', english: 'My name is...', category: 'Introductions' },
+    { hindi: 'आपका नाम क्या है?', romanization: 'Aapka naam kya hai?', english: 'What is your name?', category: 'Introductions' },
+    { hindi: 'आपसे मिलकर खुशी हुई', romanization: 'Aapse milkar khushi hui', english: 'Nice to meet you', category: 'Introductions' },
+    { hindi: 'आप कहाँ से हैं?', romanization: 'Aap kahan se hain?', english: 'Where are you from?', category: 'Introductions' },
+    { hindi: 'मैं... से हूँ', romanization: 'Main... se hoon', english: 'I am from...', category: 'Introductions' },
+    { hindi: 'फिर मिलेंगे', romanization: 'Phir milenge', english: 'See you later', category: 'Greetings' },
+    { hindi: 'क्या हाल है?', romanization: 'Kya haal hai?', english: 'How are things?', category: 'Greetings' },
+    { hindi: 'सब ठीक है', romanization: 'Sab theek hai', english: 'Everything is fine', category: 'Greetings' },
+
+    // Polite Expressions (11-20)
+    { hindi: 'कोई बात नहीं', romanization: 'Koi baat nahin', english: 'No problem', category: 'Polite' },
+    { hindi: 'बहुत धन्यवाद', romanization: 'Bahut dhanyavaad', english: 'Thank you very much', category: 'Polite' },
+    { hindi: 'मुझे माफ़ करें', romanization: 'Mujhe maaf karen', english: 'Please forgive me', category: 'Polite' },
+    { hindi: 'ज़रूर', romanization: 'Zaroor', english: 'Of course', category: 'Polite' },
+    { hindi: 'कृपया प्रतीक्षा करें', romanization: 'Kripya prateeksha karen', english: 'Please wait', category: 'Polite' },
+    { hindi: 'मदद करें', romanization: 'Madad karen', english: 'Please help', category: 'Polite' },
+    { hindi: 'बहुत अच्छा', romanization: 'Bahut accha', english: 'Very good', category: 'Polite' },
+    { hindi: 'ठीक है', romanization: 'Theek hai', english: 'Okay/Alright', category: 'Polite' },
+    { hindi: 'शुक्रिया', romanization: 'Shukriya', english: 'Thanks', category: 'Polite' },
+    { hindi: 'स्वागत है', romanization: 'Swaagat hai', english: 'You are welcome', category: 'Polite' },
+
+    // Questions (21-30)
+    { hindi: 'क्या?', romanization: 'Kya?', english: 'What?', category: 'Questions' },
+    { hindi: 'कौन?', romanization: 'Kaun?', english: 'Who?', category: 'Questions' },
+    { hindi: 'कहाँ?', romanization: 'Kahan?', english: 'Where?', category: 'Questions' },
+    { hindi: 'कब?', romanization: 'Kab?', english: 'When?', category: 'Questions' },
+    { hindi: 'क्यों?', romanization: 'Kyon?', english: 'Why?', category: 'Questions' },
+    { hindi: 'कैसे?', romanization: 'Kaise?', english: 'How?', category: 'Questions' },
+    { hindi: 'कितना?', romanization: 'Kitna?', english: 'How much?', category: 'Questions' },
+    { hindi: 'समय क्या हुआ है?', romanization: 'Samay kya hua hai?', english: 'What time is it?', category: 'Questions' },
+    { hindi: 'यह क्या है?', romanization: 'Yah kya hai?', english: 'What is this?', category: 'Questions' },
+    { hindi: 'आप हिंदी बोलते हैं?', romanization: 'Aap Hindi bolte hain?', english: 'Do you speak Hindi?', category: 'Questions' },
+
+    // Daily Activities (31-40)
+    { hindi: 'मैं स्कूल जाता हूँ', romanization: 'Main school jaata hoon', english: 'I go to school', category: 'Daily' },
+    { hindi: 'मैं घर जा रहा हूँ', romanization: 'Main ghar ja raha hoon', english: 'I am going home', category: 'Daily' },
+    { hindi: 'मुझे भूख लगी है', romanization: 'Mujhe bhookh lagi hai', english: 'I am hungry', category: 'Daily' },
+    { hindi: 'मुझे प्यास लगी है', romanization: 'Mujhe pyaas lagi hai', english: 'I am thirsty', category: 'Daily' },
+    { hindi: 'मैं थक गया हूँ', romanization: 'Main thak gaya hoon', english: 'I am tired', category: 'Daily' },
+    { hindi: 'मुझे नींद आ रही है', romanization: 'Mujhe neend aa rahi hai', english: 'I am sleepy', category: 'Daily' },
+    { hindi: 'मुझे पसंद है', romanization: 'Mujhe pasand hai', english: 'I like it', category: 'Daily' },
+    { hindi: 'मुझे पसंद नहीं है', romanization: 'Mujhe pasand nahin hai', english: 'I don\'t like it', category: 'Daily' },
+    { hindi: 'मुझे चाहिए', romanization: 'Mujhe chahiye', english: 'I need/want', category: 'Daily' },
+    { hindi: 'मैं समझता हूँ', romanization: 'Main samajhta hoon', english: 'I understand', category: 'Daily' },
+
+    // Food & Dining (41-50)
+    { hindi: 'खाना बहुत स्वादिष्ट है', romanization: 'Khaana bahut swaadisht hai', english: 'The food is very delicious', category: 'Food' },
+    { hindi: 'मुझे पानी चाहिए', romanization: 'Mujhe paani chahiye', english: 'I need water', category: 'Food' },
+    { hindi: 'क्या खाएँगे?', romanization: 'Kya khaayenge?', english: 'What will you eat?', category: 'Food' },
+    { hindi: 'बिल दीजिए', romanization: 'Bill deejiye', english: 'Please give the bill', category: 'Food' },
+    { hindi: 'मुझे चाय चाहिए', romanization: 'Mujhe chaay chahiye', english: 'I want tea', category: 'Food' },
+    { hindi: 'यह बहुत मीठा है', romanization: 'Yah bahut meetha hai', english: 'This is very sweet', category: 'Food' },
+    { hindi: 'यह बहुत तीखा है', romanization: 'Yah bahut teekha hai', english: 'This is very spicy', category: 'Food' },
+    { hindi: 'पेट भर गया', romanization: 'Pet bhar gaya', english: 'I am full', category: 'Food' },
+    { hindi: 'नाश्ता तैयार है', romanization: 'Naashta taiyaar hai', english: 'Breakfast is ready', category: 'Food' },
+    { hindi: 'खाना खा लो', romanization: 'Khaana kha lo', english: 'Eat the food', category: 'Food' },
+
+    // Shopping (51-60)
+    { hindi: 'यह कितने का है?', romanization: 'Yah kitne ka hai?', english: 'How much is this?', category: 'Shopping' },
+    { hindi: 'बहुत महंगा है', romanization: 'Bahut mahanga hai', english: 'It is very expensive', category: 'Shopping' },
+    { hindi: 'सस्ता है', romanization: 'Sasta hai', english: 'It is cheap', category: 'Shopping' },
+    { hindi: 'मैं यह लूँगा', romanization: 'Main yah loonga', english: 'I will take this', category: 'Shopping' },
+    { hindi: 'छूट दीजिए', romanization: 'Chhoot deejiye', english: 'Please give discount', category: 'Shopping' },
+    { hindi: 'और दिखाइए', romanization: 'Aur dikhaiye', english: 'Show me more', category: 'Shopping' },
+    { hindi: 'यह ठीक है', romanization: 'Yah theek hai', english: 'This is fine', category: 'Shopping' },
+    { hindi: 'मुझे यह पसंद है', romanization: 'Mujhe yah pasand hai', english: 'I like this', category: 'Shopping' },
+    { hindi: 'कार्ड चलेगा?', romanization: 'Card chalega?', english: 'Will card work?', category: 'Shopping' },
+    { hindi: 'पैसे वापस दीजिए', romanization: 'Paise waapas deejiye', english: 'Please return the money', category: 'Shopping' },
+
+    // Directions (61-70)
+    { hindi: 'शौचालय कहाँ है?', romanization: 'Shauchalay kahan hai?', english: 'Where is the bathroom?', category: 'Directions' },
+    { hindi: 'दाईं ओर', romanization: 'Daayeen or', english: 'To the right', category: 'Directions' },
+    { hindi: 'बाईं ओर', romanization: 'Baayeen or', english: 'To the left', category: 'Directions' },
+    { hindi: 'सीधे जाइए', romanization: 'Seedhe jaaiye', english: 'Go straight', category: 'Directions' },
+    { hindi: 'पास', romanization: 'Paas', english: 'Near', category: 'Directions' },
+    { hindi: 'दूर', romanization: 'Door', english: 'Far', category: 'Directions' },
+    { hindi: 'यहाँ', romanization: 'Yahan', english: 'Here', category: 'Directions' },
+    { hindi: 'वहाँ', romanization: 'Wahan', english: 'There', category: 'Directions' },
+    { hindi: 'ऊपर', romanization: 'Oopar', english: 'Up/Upstairs', category: 'Directions' },
+    { hindi: 'नीचे', romanization: 'Neeche', english: 'Down/Downstairs', category: 'Directions' },
+
+    // Weather (71-80)
+    { hindi: 'गर्मी है', romanization: 'Garmi hai', english: 'It is hot', category: 'Weather' },
+    { hindi: 'ठंड है', romanization: 'Thand hai', english: 'It is cold', category: 'Weather' },
+    { hindi: 'धूप है', romanization: 'Dhoop hai', english: 'It is sunny', category: 'Weather' },
+    { hindi: 'बारिश हो रही है', romanization: 'Baarish ho rahi hai', english: 'It is raining', category: 'Weather' },
+    { hindi: 'बर्फ़ गिर रही है', romanization: 'Barf gir rahi hai', english: 'It is snowing', category: 'Weather' },
+    { hindi: 'हवा चल रही है', romanization: 'Hawa chal rahi hai', english: 'It is windy', category: 'Weather' },
+    { hindi: 'बादल हैं', romanization: 'Baadal hain', english: 'It is cloudy', category: 'Weather' },
+    { hindi: 'अच्छा मौसम है', romanization: 'Accha mausam hai', english: 'Good weather', category: 'Weather' },
+    { hindi: 'खराब मौसम है', romanization: 'Kharaab mausam hai', english: 'Bad weather', category: 'Weather' },
+    { hindi: 'मौसम कैसा है?', romanization: 'Mausam kaisa hai?', english: 'How is the weather?', category: 'Weather' },
+
+    // Feelings & Emotions (81-90)
+    { hindi: 'मैं खुश हूँ', romanization: 'Main khush hoon', english: 'I am happy', category: 'Emotions' },
+    { hindi: 'मैं उदास हूँ', romanization: 'Main udaas hoon', english: 'I am sad', category: 'Emotions' },
+    { hindi: 'मैं गुस्से में हूँ', romanization: 'Main gusse mein hoon', english: 'I am angry', category: 'Emotions' },
+    { hindi: 'मैं उत्साहित हूँ', romanization: 'Main utsaahit hoon', english: 'I am excited', category: 'Emotions' },
+    { hindi: 'मैं घबराया हुआ हूँ', romanization: 'Main ghabraaya hua hoon', english: 'I am nervous', category: 'Emotions' },
+    { hindi: 'मुझे बोर हो रहा है', romanization: 'Mujhe bore ho raha hai', english: 'I am getting bored', category: 'Emotions' },
+    { hindi: 'मैं चिंतित हूँ', romanization: 'Main chintit hoon', english: 'I am worried', category: 'Emotions' },
+    { hindi: 'मैं हैरान हूँ', romanization: 'Main hairaan hoon', english: 'I am surprised', category: 'Emotions' },
+    { hindi: 'मैं भ्रमित हूँ', romanization: 'Main bhramit hoon', english: 'I am confused', category: 'Emotions' },
+    { hindi: 'मुझे अच्छा लग रहा है', romanization: 'Mujhe accha lag raha hai', english: 'I am feeling good', category: 'Emotions' },
+
+    // Useful Phrases (91-100)
+    { hindi: 'मैं नहीं समझा', romanization: 'Main nahin samjha', english: 'I didn\'t understand', category: 'Useful' },
+    { hindi: 'फिर से कहिए', romanization: 'Phir se kahiye', english: 'Please say again', category: 'Useful' },
+    { hindi: 'धीरे बोलिए', romanization: 'Dheere boliye', english: 'Please speak slowly', category: 'Useful' },
+    { hindi: 'मैं हिंदी नहीं बोलता', romanization: 'Main Hindi nahin bolta', english: 'I don\'t speak Hindi', category: 'Useful' },
+    { hindi: 'इसका मतलब क्या है?', romanization: 'Iska matlab kya hai?', english: 'What does this mean?', category: 'Useful' },
+    { hindi: 'मेरी मदद करें', romanization: 'Meri madad karen', english: 'Please help me', category: 'Useful' },
+    { hindi: 'एक मिनट', romanization: 'Ek minute', english: 'One minute', category: 'Useful' },
+    { hindi: 'रुकिए', romanization: 'Rukiye', english: 'Wait', category: 'Useful' },
+    { hindi: 'बिल्कुल', romanization: 'Bilkul', english: 'Absolutely', category: 'Useful' },
+    { hindi: 'बहुत बढ़िया!', romanization: 'Bahut badhiya!', english: 'Excellent!', category: 'Useful' }
+];
+
+export default {
+    hindiAlphabet,
+    popularWords,
+    dailyPhrases
+};

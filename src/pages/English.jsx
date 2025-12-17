@@ -1,89 +1,228 @@
 import { useState } from 'react';
-import QuizEngine from '../components/QuizEngine';
-import DifficultySelector from '../components/DifficultySelector';
-import englishQuestions from '../data/englishQuestions';
 import { useGamification } from '../context/GamificationContext';
+import DifficultySelector from '../components/DifficultySelector';
+import QuizEngine from '../components/QuizEngine';
+import englishQuestions from '../data/englishQuestions';
+import { englishAlphabet, popularWords, dailyPhrases } from '../data/englishContent';
 
 function English() {
-    const { getUnlockedLevels } = useGamification();
+    const { unlockedLevels } = useGamification();
     const [selectedDifficulty, setSelectedDifficulty] = useState(null);
-    const [showQuiz, setShowQuiz] = useState(false);
+    const [activeTab, setActiveTab] = useState('alphabet');
 
-    const unlockedLevels = getUnlockedLevels('english');
-
-    // Handle difficulty selection
     const handleDifficultySelect = (difficulty) => {
         setSelectedDifficulty(difficulty);
-        setShowQuiz(true);
     };
 
-    // Handle quiz completion
-    const handleQuizComplete = () => {
-        // Quiz completed
-    };
-
-    // Handle back to difficulty selector
-    const handleBackToSelector = () => {
-        setShowQuiz(false);
+    const handleBackToSelection = () => {
         setSelectedDifficulty(null);
     };
 
-    // If quiz is active, show QuizEngine
-    if (showQuiz && selectedDifficulty) {
+    if (selectedDifficulty) {
         return (
-            <div>
-                <QuizEngine
-                    title={`English - ${selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1)}`}
-                    subtitle="Master grammar, vocabulary, and language skills!"
-                    questions={englishQuestions[selectedDifficulty]}
-                    subject="english"
-                    emoji="📚"
-                    difficulty={selectedDifficulty}
-                    onComplete={handleQuizComplete}
-                />
-                {/* Back to Difficulty Selector Button */}
-                <div className="text-center mt-8 pb-12">
-                    <button
-                        onClick={handleBackToSelector}
-                        className="bg-gray-500 text-white px-8 py-4 rounded-xl text-xl font-bold
-                     hover:bg-gray-600 hover:scale-105 transition-all duration-200 shadow-lg"
-                    >
-                        ← Change Difficulty
-                    </button>
-                </div>
-            </div>
+            <QuizEngine
+                questions={englishQuestions[selectedDifficulty]}
+                subject="english"
+                difficulty={selectedDifficulty}
+                onBack={handleBackToSelection}
+            />
         );
     }
 
-    // Otherwise, show difficulty selector
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-12 px-4">
-            <div className="max-w-4xl mx-auto">
-                {/* Page Title */}
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
+            <div className="max-w-6xl mx-auto">
+                {/* Page Header */}
                 <div className="text-center mb-12">
                     <div className="text-6xl mb-4">📚</div>
                     <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
-                        English Language
+                        Learn English
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-700 font-semibold">
-                        Learn grammar, vocabulary, and communication skills!
+                        Master the global language of communication!
                     </p>
                 </div>
 
-                {/* Difficulty Selector */}
-                <DifficultySelector
-                    selectedLevel={selectedDifficulty}
-                    unlockedLevels={unlockedLevels}
-                    onSelect={handleDifficultySelect}
-                    subject="english"
-                />
-
-                {/* Encouragement Section */}
-                <div className="mt-8 text-center bg-white rounded-2xl p-6 shadow-md">
-                    <p className="text-lg text-gray-700">
-                        📖 Master English to communicate better and express yourself clearly!
-                    </p>
+                {/* Tab Navigation */}
+                <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                    <button
+                        onClick={() => setActiveTab('alphabet')}
+                        className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet'
+                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            }`}
+                    >
+                        📝 Alphabet (A-Z)
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('words')}
+                        className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'words'
+                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            }`}
+                    >
+                        📚 Popular Words
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('phrases')}
+                        className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'phrases'
+                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            }`}
+                    >
+                        💬 Daily Phrases
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('quiz')}
+                        className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'quiz'
+                                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-100'
+                            }`}
+                    >
+                        🎯 Take Quiz
+                    </button>
                 </div>
+
+                {/* Alphabet Tab */}
+                {activeTab === 'alphabet' && (
+                    <div className="bg-white rounded-2xl p-8 shadow-lg">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                            English Alphabet (26 Letters)
+                        </h2>
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                            {englishAlphabet.map((item) => (
+                                <div
+                                    key={item.letter}
+                                    className={`rounded-xl p-4 hover:shadow-lg transition-all duration-300 hover:scale-105 ${item.type === 'vowel'
+                                            ? 'bg-gradient-to-br from-purple-100 to-pink-100'
+                                            : 'bg-gradient-to-br from-blue-100 to-indigo-100'
+                                        }`}
+                                >
+                                    <div className={`text-5xl font-bold mb-2 text-center ${item.type === 'vowel' ? 'text-purple-600' : 'text-indigo-600'
+                                        }`}>
+                                        {item.letter}
+                                    </div>
+                                    <div className="text-sm text-gray-700 mb-1 text-center">
+                                        <strong>{item.pronunciation}</strong>
+                                    </div>
+                                    <div className="text-xs text-gray-600 text-center">
+                                        {item.example}
+                                    </div>
+                                    <div className="text-xs text-center mt-2">
+                                        <span className={`px-2 py-1 rounded-full text-white ${item.type === 'vowel' ? 'bg-purple-500' : 'bg-indigo-500'
+                                            }`}>
+                                            {item.type}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-6 p-4 bg-blue-50 rounded-xl">
+                            <p className="text-gray-700 text-center">
+                                <strong>Vowels (5):</strong> A, E, I, O, U •
+                                <strong className="ml-2">Consonants (21):</strong> All other letters
+                            </p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Popular Words Tab */}
+                {activeTab === 'words' && (
+                    <div className="bg-white rounded-2xl p-8 shadow-lg">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                            100 Popular English Words
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {popularWords.map((word, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300"
+                                >
+                                    <div className="flex justify-between items-start mb-2">
+                                        <div className="text-2xl font-bold text-indigo-600">
+                                            {word.word}
+                                        </div>
+                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
+                                            {word.category}
+                                        </span>
+                                    </div>
+                                    <div className="text-sm text-gray-600 mb-2">
+                                        {word.meaning}
+                                    </div>
+                                    <div className="text-sm text-gray-700 italic">
+                                        "{word.example}"
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Daily Phrases Tab */}
+                {activeTab === 'phrases' && (
+                    <div className="bg-white rounded-2xl p-8 shadow-lg">
+                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                            100 Daily English Phrases
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {dailyPhrases.map((phrase, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300"
+                                >
+                                    <div className="flex justify-between items-start mb-3">
+                                        <div className="text-xl font-bold text-blue-600 flex-1">
+                                            {phrase.phrase}
+                                        </div>
+                                        <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
+                                            {phrase.category}
+                                        </span>
+                                    </div>
+                                    <div className="text-sm text-gray-600 mb-2">
+                                        <strong>Usage:</strong> {phrase.usage}
+                                    </div>
+                                    <div className="text-sm text-gray-700 italic">
+                                        "{phrase.example}"
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Quiz Tab */}
+                {activeTab === 'quiz' && (
+                    <div>
+                        <div className="text-center mb-8">
+                            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                                Test Your English Knowledge!
+                            </h2>
+                            <p className="text-lg text-gray-600">
+                                Choose a difficulty level to start the quiz
+                            </p>
+                        </div>
+
+                        <DifficultySelector
+                            selectedLevel={selectedDifficulty}
+                            unlockedLevels={unlockedLevels.english}
+                            onSelect={handleDifficultySelect}
+                            subject="english"
+                        />
+
+                        <div className="mt-12 bg-white rounded-2xl p-6 shadow-md">
+                            <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                                Why Learn English? 🌍
+                            </h3>
+                            <ul className="space-y-2 text-gray-700">
+                                <li>✅ Most widely spoken language globally</li>
+                                <li>✅ Language of international business and science</li>
+                                <li>✅ Opens doors to global opportunities</li>
+                                <li>✅ Access to vast knowledge and entertainment</li>
+                                <li>✅ Essential for academic and career success</li>
+                            </ul>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
