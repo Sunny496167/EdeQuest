@@ -64,6 +64,48 @@ const AVAILABLE_BADGES = [
         unlockCondition: 'Complete History quiz'
     },
     {
+        id: 'english_explorer',
+        name: 'English Explorer',
+        emoji: '📚',
+        description: 'Completed English quiz!',
+        unlockCondition: 'Complete English quiz'
+    },
+    {
+        id: 'hindi_explorer',
+        name: 'Hindi Explorer',
+        emoji: '🇮🇳',
+        description: 'Completed Hindi quiz!',
+        unlockCondition: 'Complete Hindi quiz'
+    },
+    {
+        id: 'civics_explorer',
+        name: 'Civics Explorer',
+        emoji: '⚖️',
+        description: 'Completed Civics quiz!',
+        unlockCondition: 'Complete Civics quiz'
+    },
+    {
+        id: 'civic_sense_champion',
+        name: 'Civic Sense Champion',
+        emoji: '🌟',
+        description: 'Completed Civic Sense quiz!',
+        unlockCondition: 'Complete Civic Sense quiz'
+    },
+    {
+        id: 'life_skills_master',
+        name: 'Life Skills Master',
+        emoji: '🧠',
+        description: 'Completed Life Skills quiz!',
+        unlockCondition: 'Complete Life Skills quiz'
+    },
+    {
+        id: 'environmental_hero',
+        name: 'Environmental Hero',
+        emoji: '🌍',
+        description: 'Completed Environmental Studies quiz!',
+        unlockCondition: 'Complete Environmental Studies quiz'
+    },
+    {
         id: 'all_subjects',
         name: 'Master Learner',
         emoji: '🏆',
@@ -98,7 +140,13 @@ export const GamificationProvider = ({ children }) => {
             algebra: 0,
             science: 0,
             geography: 0,
-            history: 0
+            history: 0,
+            english: 0,
+            hindi: 0,
+            civics: 0,
+            civicsense: 0,
+            lifeskills: 0,
+            environmental: 0
         };
     });
 
@@ -110,7 +158,13 @@ export const GamificationProvider = ({ children }) => {
             algebra: ['easy'],
             science: ['easy'],
             geography: ['easy'],
-            history: ['easy']
+            history: ['easy'],
+            english: ['easy'],
+            hindi: ['easy'],
+            civics: ['easy'],
+            civicsense: ['easy'],
+            lifeskills: ['easy'],
+            environmental: ['easy']
         };
     });
 
@@ -151,7 +205,13 @@ export const GamificationProvider = ({ children }) => {
             algebra: 0,
             science: 0,
             geography: 0,
-            history: 0
+            history: 0,
+            english: 0,
+            hindi: 0,
+            civics: 0,
+            civicsense: 0,
+            lifeskills: 0,
+            environmental: 0
         };
     });
 

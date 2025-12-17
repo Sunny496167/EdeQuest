@@ -59,7 +59,13 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                     algebra: 'math_explorer',
                     science: 'science_explorer',
                     geography: 'geography_explorer',
-                    history: 'history_explorer'
+                    history: 'history_explorer',
+                    english: 'english_explorer',
+                    hindi: 'hindi_explorer',
+                    civics: 'civics_explorer',
+                    civicsense: 'civic_sense_champion',
+                    lifeskills: 'life_skills_master',
+                    environmental: 'environmental_hero'
                 };
 
                 if (badgeMap[subject]) {

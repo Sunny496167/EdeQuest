@@ -56,6 +56,60 @@ function Home() {
                     color="bg-gradient-to-br from-blue-200 to-blue-100"
                     progress="0%"
                 />
+
+                {/* English Card */}
+                <SubjectCard
+                    title="English"
+                    emoji="📚"
+                    description="Master grammar, vocabulary, and language skills!"
+                    color="bg-gradient-to-br from-indigo-200 to-indigo-100"
+                    progress="0%"
+                />
+
+                {/* Hindi Card */}
+                <SubjectCard
+                    title="Hindi"
+                    emoji="🇮🇳"
+                    description="Learn Hindi language and expand your vocabulary!"
+                    color="bg-gradient-to-br from-yellow-200 to-yellow-100"
+                    progress="0%"
+                />
+
+                {/* Civics Card */}
+                <SubjectCard
+                    title="Civics"
+                    emoji="⚖️"
+                    description="Learn about government, rights, and citizenship!"
+                    color="bg-gradient-to-br from-cyan-200 to-cyan-100"
+                    progress="0%"
+                />
+
+                {/* Civic Sense Card */}
+                <SubjectCard
+                    title="Civic Sense"
+                    emoji="🌟"
+                    description="Learn good manners, ethics, and kindness!"
+                    color="bg-gradient-to-br from-teal-200 to-teal-100"
+                    progress="0%"
+                />
+
+                {/* Life Skills Card */}
+                <SubjectCard
+                    title="Life Skills"
+                    emoji="🧠"
+                    description="Problem-solving, decision-making, and emotional intelligence!"
+                    color="bg-gradient-to-br from-rose-200 to-rose-100"
+                    progress="0%"
+                />
+
+                {/* Environmental Studies Card */}
+                <SubjectCard
+                    title="Environmental"
+                    emoji="🌱"
+                    description="Learn to protect our planet and nature!"
+                    color="bg-gradient-to-br from-emerald-200 to-emerald-100"
+                    progress="0%"
+                />
             </div>
 
             {/* Motivational Section */}
