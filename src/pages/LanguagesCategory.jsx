@@ -19,7 +19,7 @@ function LanguagesCategory() {
                 </div>
 
                 {/* Language Subject Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* English */}
                     <SubjectCard
                         title="English"
@@ -38,6 +38,16 @@ function LanguagesCategory() {
                         color="bg-gradient-to-br from-yellow-200 to-yellow-100"
                         link="/hindi"
                         progress={`${progress.hindi || 0}%`}
+                    />
+
+                    {/* Spanish */}
+                    <SubjectCard
+                        title="Spanish"
+                        emoji="🇪🇸"
+                        description="¡Hola! Learn Spanish!"
+                        color="bg-gradient-to-br from-red-200 to-orange-100"
+                        link="/spanish"
+                        progress={`${progress.spanish || 0}%`}
                     />
                 </div>
 

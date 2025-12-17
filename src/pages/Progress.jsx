@@ -30,7 +30,8 @@ function Progress() {
         ],
         languages: [
             { name: 'English', key: 'english', emoji: '📚' },
-            { name: 'Hindi', key: 'hindi', emoji: '🇮🇳' }
+            { name: 'Hindi', key: 'hindi', emoji: '🇮🇳' },
+            { name: 'Spanish', key: 'spanish', emoji: '🇪🇸' }
         ],
         lifeValues: [
             { name: 'Civic Sense', key: 'civicsense', emoji: '🌟' },

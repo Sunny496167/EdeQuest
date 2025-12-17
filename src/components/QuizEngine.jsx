@@ -75,7 +75,8 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                     physics: 'physics_genius',
                     chemistry: 'chemistry_wizard',
                     biology: 'biology_scholar',
-                    economics: 'economics_expert'
+                    economics: 'economics_expert',
+                    spanish: 'spanish_explorer'
                 };
 
                 if (badgeMap[subject]) {

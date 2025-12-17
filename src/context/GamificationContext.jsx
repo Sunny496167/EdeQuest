@@ -148,6 +148,13 @@ const AVAILABLE_BADGES = [
         unlockCondition: 'Complete Economics quiz'
     },
     {
+        id: 'spanish_explorer',
+        name: 'Spanish Explorer',
+        emoji: '🇪🇸',
+        description: '¡Hola! Complete your first Spanish quiz',
+        unlockCondition: 'Complete Economics quiz'
+    },
+    {
         id: 'all_subjects',
         name: 'Master Learner',
         emoji: '🏆',
@@ -194,7 +201,8 @@ export const GamificationProvider = ({ children }) => {
             physics: 0,
             chemistry: 0,
             biology: 0,
-            economics: 0
+            economics: 0,
+            spanish: 0
         };
     });
 
@@ -218,7 +226,8 @@ export const GamificationProvider = ({ children }) => {
             physics: ['easy'],
             chemistry: ['easy'],
             biology: ['easy'],
-            economics: ['easy']
+            economics: ['easy'],
+            spanish: ['easy']
         };
     });
 
@@ -271,7 +280,8 @@ export const GamificationProvider = ({ children }) => {
             physics: 0,
             chemistry: 0,
             biology: 0,
-            economics: 0
+            economics: 0,
+            spanish: 0
         };
     });
 
