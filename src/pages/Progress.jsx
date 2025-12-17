@@ -8,14 +8,36 @@ function Progress() {
     const allBadges = getAllBadges();
     const unlockedCount = allBadges.filter(b => b.unlocked).length;
 
-    // Subject data
-    const subjects = [
-        { name: 'Math', key: 'math', emoji: '🔢' },
-        { name: 'Algebra', key: 'algebra', emoji: '🧮' },
-        { name: 'Science', key: 'science', emoji: '🔬' },
-        { name: 'Geography', key: 'geography', emoji: '🌍' },
-        { name: 'History', key: 'history', emoji: '⏳' }
-    ];
+    // Subject data - All 17 subjects organized by category
+    const subjectsByCategory = {
+        mathematics: [
+            { name: 'Basic Math', key: 'math', emoji: '🔢' },
+            { name: 'Algebra', key: 'algebra', emoji: '🧮' },
+            { name: 'Fractions', key: 'fractions', emoji: '🍕' },
+            { name: 'Geometry', key: 'geometry', emoji: '📐' }
+        ],
+        science: [
+            { name: 'General Science', key: 'science', emoji: '🔬' },
+            { name: 'Physics', key: 'physics', emoji: '⚡' },
+            { name: 'Chemistry', key: 'chemistry', emoji: '🧪' },
+            { name: 'Biology', key: 'biology', emoji: '🧬' }
+        ],
+        socialScience: [
+            { name: 'History', key: 'history', emoji: '⏳' },
+            { name: 'Geography', key: 'geography', emoji: '🌍' },
+            { name: 'Civics', key: 'civics', emoji: '⚖️' },
+            { name: 'Economics', key: 'economics', emoji: '💰' }
+        ],
+        languages: [
+            { name: 'English', key: 'english', emoji: '📚' },
+            { name: 'Hindi', key: 'hindi', emoji: '🇮🇳' }
+        ],
+        lifeValues: [
+            { name: 'Civic Sense', key: 'civicsense', emoji: '🌟' },
+            { name: 'Life Skills', key: 'lifeskills', emoji: '🧠' },
+            { name: 'Environmental Studies', key: 'environmental', emoji: '🌱' }
+        ]
+    };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 py-12 px-4">
@@ -69,15 +91,79 @@ function Progress() {
                         Subject Progress 📊
                     </h2>
 
-                    <div className="grid grid-cols-1 gap-6">
-                        {subjects.map((subject) => (
-                            <ProgressBar
-                                key={subject.key}
-                                subject={subject.name}
-                                percentage={progress[subject.key]}
-                                emoji={subject.emoji}
-                            />
-                        ))}
+                    {/* Mathematics */}
+                    <div className="mb-8">
+                        <h3 className="text-2xl font-bold text-violet-600 mb-4">Mathematics</h3>
+                        <div className="grid grid-cols-1 gap-4">
+                            {subjectsByCategory.mathematics.map((subject) => (
+                                <ProgressBar
+                                    key={subject.key}
+                                    subject={subject.name}
+                                    percentage={progress[subject.key] || 0}
+                                    emoji={subject.emoji}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Science */}
+                    <div className="mb-8">
+                        <h3 className="text-2xl font-bold text-blue-600 mb-4">Science</h3>
+                        <div className="grid grid-cols-1 gap-4">
+                            {subjectsByCategory.science.map((subject) => (
+                                <ProgressBar
+                                    key={subject.key}
+                                    subject={subject.name}
+                                    percentage={progress[subject.key] || 0}
+                                    emoji={subject.emoji}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Social Science */}
+                    <div className="mb-8">
+                        <h3 className="text-2xl font-bold text-green-600 mb-4">Social Science</h3>
+                        <div className="grid grid-cols-1 gap-4">
+                            {subjectsByCategory.socialScience.map((subject) => (
+                                <ProgressBar
+                                    key={subject.key}
+                                    subject={subject.name}
+                                    percentage={progress[subject.key] || 0}
+                                    emoji={subject.emoji}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Languages */}
+                    <div className="mb-8">
+                        <h3 className="text-2xl font-bold text-pink-600 mb-4">Languages</h3>
+                        <div className="grid grid-cols-1 gap-4">
+                            {subjectsByCategory.languages.map((subject) => (
+                                <ProgressBar
+                                    key={subject.key}
+                                    subject={subject.name}
+                                    percentage={progress[subject.key] || 0}
+                                    emoji={subject.emoji}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Life & Values */}
+                    <div className="mb-8">
+                        <h3 className="text-2xl font-bold text-orange-600 mb-4">Life & Values</h3>
+                        <div className="grid grid-cols-1 gap-4">
+                            {subjectsByCategory.lifeValues.map((subject) => (
+                                <ProgressBar
+                                    key={subject.key}
+                                    subject={subject.name}
+                                    percentage={progress[subject.key] || 0}
+                                    emoji={subject.emoji}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </section>
 

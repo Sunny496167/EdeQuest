@@ -1,6 +1,9 @@
 import SubjectCard from '../components/SubjectCard';
+import { useGamification } from '../context/GamificationContext';
 
 function Mathematics() {
+    const { progress } = useGamification();
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 py-12 px-4">
             <div className="max-w-6xl mx-auto">
@@ -24,6 +27,7 @@ function Mathematics() {
                         description="Addition, subtraction, multiplication, and division!"
                         color="bg-gradient-to-br from-purple-200 to-purple-100"
                         link="/math"
+                        progress={`${progress.math || 0}%`}
                     />
 
                     {/* Algebra */}
@@ -33,6 +37,7 @@ function Mathematics() {
                         description="Solve equations and work with variables!"
                         color="bg-gradient-to-br from-indigo-200 to-indigo-100"
                         link="/algebra"
+                        progress={`${progress.algebra || 0}%`}
                     />
 
                     {/* Fractions */}
@@ -42,6 +47,7 @@ function Mathematics() {
                         description="Learn about parts of a whole!"
                         color="bg-gradient-to-br from-pink-200 to-pink-100"
                         link="/fractions"
+                        progress={`${progress.fractions || 0}%`}
                     />
 
                     {/* Geometry */}
@@ -51,6 +57,7 @@ function Mathematics() {
                         description="Explore shapes, angles, and measurements!"
                         color="bg-gradient-to-br from-blue-200 to-blue-100"
                         link="/geometry"
+                        progress={`${progress.geometry || 0}%`}
                     />
                 </div>
 

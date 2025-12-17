@@ -1,6 +1,9 @@
 import SubjectCard from '../components/SubjectCard';
+import { useGamification } from '../context/GamificationContext';
 
 function LanguagesCategory() {
+    const { progress } = useGamification();
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 px-4">
             <div className="max-w-6xl mx-auto">
@@ -16,30 +19,32 @@ function LanguagesCategory() {
                 </div>
 
                 {/* Language Subject Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* English */}
                     <SubjectCard
                         title="English"
-                        emoji="📖"
-                        description="Master grammar, vocabulary, and language skills!"
+                        emoji="📚"
+                        description="Master grammar and vocabulary!"
                         color="bg-gradient-to-br from-indigo-200 to-indigo-100"
                         link="/english"
+                        progress={`${progress.english || 0}%`}
                     />
 
                     {/* Hindi */}
                     <SubjectCard
                         title="Hindi"
                         emoji="🇮🇳"
-                        description="Learn Hindi language and expand vocabulary!"
-                        color="bg-gradient-to-br from-orange-200 to-orange-100"
+                        description="Learn Hindi language!"
+                        color="bg-gradient-to-br from-yellow-200 to-yellow-100"
                         link="/hindi"
+                        progress={`${progress.hindi || 0}%`}
                     />
                 </div>
 
                 {/* Encouragement Section */}
                 <div className="mt-12 text-center bg-white rounded-2xl p-6 shadow-md">
                     <p className="text-lg text-gray-700">
-                        💬 Learning languages opens doors to new worlds and cultures!
+                        🗣️ Learning languages opens doors to new worlds!
                     </p>
                 </div>
             </div>

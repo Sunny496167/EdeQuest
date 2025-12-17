@@ -1,7 +1,10 @@
 import SubjectCard from '../components/SubjectCard';
 import DailyGoalCard from '../components/DailyGoalCard';
+import { useGamification } from '../context/GamificationContext';
 
 function Home() {
+    const { progress } = useGamification();
+
     return (
         <div className="py-8 md:py-12">
             {/* Daily Goal Card */}
@@ -27,7 +30,7 @@ function Home() {
                     emoji="📐"
                     description="Numbers, equations, and problem-solving fun!"
                     color="bg-gradient-to-br from-purple-200 to-purple-100"
-                    progress="0%"
+                    progress={`${progress.math || 0}%`}
                 />
 
                 {/* Science Card */}
@@ -36,7 +39,7 @@ function Home() {
                     emoji="🧪"
                     description="Discover how the world works through experiments!"
                     color="bg-gradient-to-br from-green-200 to-green-100"
-                    progress="0%"
+                    progress={`${progress.algebra || 0}%`}
                 />
 
                 {/* History Card */}
@@ -45,7 +48,7 @@ function Home() {
                     emoji="🏺"
                     description="Travel back in time and explore ancient civilizations!"
                     color="bg-gradient-to-br from-orange-200 to-orange-100"
-                    progress="0%"
+                    progress={`${progress.history || 0}%`}
                 />
 
                 {/* Geography Card */}
@@ -54,7 +57,7 @@ function Home() {
                     emoji="🌍"
                     description="Explore countries, cultures, and amazing places!"
                     color="bg-gradient-to-br from-blue-200 to-blue-100"
-                    progress="0%"
+                    progress={`${progress.geography || 0}%`}
                 />
 
                 {/* English Card */}
@@ -63,7 +66,7 @@ function Home() {
                     emoji="📚"
                     description="Master grammar, vocabulary, and language skills!"
                     color="bg-gradient-to-br from-indigo-200 to-indigo-100"
-                    progress="0%"
+                    progress={`${progress.english || 0}%`}
                 />
 
                 {/* Hindi Card */}
@@ -72,7 +75,7 @@ function Home() {
                     emoji="🇮🇳"
                     description="Learn Hindi language and expand your vocabulary!"
                     color="bg-gradient-to-br from-yellow-200 to-yellow-100"
-                    progress="0%"
+                    progress={`${progress.hindi || 0}%`}
                 />
 
                 {/* Civics Card */}
@@ -81,7 +84,7 @@ function Home() {
                     emoji="⚖️"
                     description="Learn about government, rights, and citizenship!"
                     color="bg-gradient-to-br from-cyan-200 to-cyan-100"
-                    progress="0%"
+                    progress={`${progress.civics || 0}%`}
                 />
 
                 {/* Civic Sense Card */}
@@ -90,7 +93,7 @@ function Home() {
                     emoji="🌟"
                     description="Learn good manners, ethics, and kindness!"
                     color="bg-gradient-to-br from-teal-200 to-teal-100"
-                    progress="0%"
+                    progress={`${progress.civicsense || 0}%`}
                 />
 
                 {/* Life Skills Card */}
@@ -99,7 +102,7 @@ function Home() {
                     emoji="🧠"
                     description="Problem-solving, decision-making, and emotional intelligence!"
                     color="bg-gradient-to-br from-rose-200 to-rose-100"
-                    progress="0%"
+                    progress={`${progress.lifeskills || 0}%`}
                 />
 
                 {/* Environmental Studies Card */}
@@ -108,7 +111,7 @@ function Home() {
                     emoji="🌱"
                     description="Learn to protect our planet and nature!"
                     color="bg-gradient-to-br from-emerald-200 to-emerald-100"
-                    progress="0%"
+                    progress={`${progress.environmental || 0}%`}
                 />
             </div>
 
