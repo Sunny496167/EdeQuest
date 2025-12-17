@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
 import fractionsQuestions from '../data/fractionsQuestions';
 
 function Fractions() {
+    const { unlockedLevels } = useGamification();
     const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
     const handleDifficultySelect = (difficulty) => {
@@ -32,7 +34,9 @@ function Fractions() {
 
                         {/* Difficulty Selection */}
                         <DifficultySelector
-                            onSelectDifficulty={handleDifficultySelect}
+                            selectedLevel={selectedDifficulty}
+                            unlockedLevels={unlockedLevels.fractions}
+                            onSelect={handleDifficultySelect}
                             subject="fractions"
                         />
 

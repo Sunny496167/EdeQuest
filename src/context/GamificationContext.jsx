@@ -188,7 +188,13 @@ export const GamificationProvider = ({ children }) => {
             civics: 0,
             civicsense: 0,
             lifeskills: 0,
-            environmental: 0
+            environmental: 0,
+            fractions: 0,
+            geometry: 0,
+            physics: 0,
+            chemistry: 0,
+            biology: 0,
+            economics: 0
         };
     });
 
@@ -259,7 +265,13 @@ export const GamificationProvider = ({ children }) => {
             civics: 0,
             civicsense: 0,
             lifeskills: 0,
-            environmental: 0
+            environmental: 0,
+            fractions: 0,
+            geometry: 0,
+            physics: 0,
+            chemistry: 0,
+            biology: 0,
+            economics: 0
         };
     });
 

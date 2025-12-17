@@ -14,36 +14,44 @@ function SubjectCard({ title, emoji, description, color, progress = "0% Complete
             whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -5 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
             className={`${color} rounded-2xl p-6 shadow-md 
-                  hover:shadow-lg
-                  transition-shadow duration-300 
-                  cursor-pointer`}
+                  hover:shadow-2xl hover-lift
+                  transition-all duration-300 
+                  cursor-pointer relative overflow-hidden group`}
         >
-            {/* Emoji Icon */}
-            <div className="text-6xl mb-4 text-center">
+            {/* Animated Background Glow on Hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+            {/* Emoji Icon with Float Animation */}
+            <div className="text-6xl mb-4 text-center animate-float relative z-10">
                 {emoji}
             </div>
 
+            {/* Sparkle Effect on Hover */}
+            <div className="absolute top-4 right-4 text-2xl opacity-0 group-hover:opacity-100 group-hover:animate-spin-slow transition-opacity duration-300">
+                ✨
+            </div>
+
             {/* Subject Title */}
-            <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2 text-center relative z-10 group-hover:text-violet-600 transition-colors duration-300">
                 {title}
             </h3>
 
             {/* Description */}
-            <p className="text-gray-700 text-center mb-4 min-h-[3rem]">
+            <p className="text-gray-700 text-center mb-4 min-h-12 relative z-10">
                 {description}
             </p>
 
             {/* Progress Indicator */}
-            <div className="mt-4 pt-4 border-t border-gray-300">
+            <div className="mt-4 pt-4 border-t border-gray-300 relative z-10">
                 <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-gray-600">Progress:</span>
                     <span className="text-sm font-bold text-gray-800">{progress}</span>
                 </div>
 
-                {/* Progress Bar */}
-                <div className="w-full bg-white rounded-full h-2 mt-2">
+                {/* Animated Progress Bar */}
+                <div className="w-full bg-white rounded-full h-2 mt-2 overflow-hidden">
                     <div
-                        className="bg-gray-800 h-2 rounded-full"
+                        className="bg-gradient-to-r from-violet-600 to-pink-600 h-2 rounded-full transition-all duration-500 ease-out"
                         style={{ width: progress }}
                     ></div>
                 </div>

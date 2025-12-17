@@ -31,7 +31,9 @@ function DifficultySelector({ selectedLevel, unlockedLevels, onSelect, subject }
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {levels.map((level) => {
-                    const isUnlocked = unlockedLevels.includes(level.id);
+                    // Safety check: if unlockedLevels is undefined, default to ['easy']
+                    const safeUnlockedLevels = unlockedLevels || ['easy'];
+                    const isUnlocked = safeUnlockedLevels.includes(level.id);
                     const isSelected = selectedLevel === level.id;
 
                     return (

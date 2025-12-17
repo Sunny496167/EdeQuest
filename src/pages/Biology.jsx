@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
 import biologyQuestions from '../data/biologyQuestions';
 
 function Biology() {
+    const { unlockedLevels } = useGamification();
     const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
     const handleDifficultySelect = (difficulty) => {
@@ -30,7 +32,9 @@ function Biology() {
                         </div>
 
                         <DifficultySelector
-                            onSelectDifficulty={handleDifficultySelect}
+                            selectedLevel={selectedDifficulty}
+                            unlockedLevels={unlockedLevels.biology}
+                            onSelect={handleDifficultySelect}
                             subject="biology"
                         />
 

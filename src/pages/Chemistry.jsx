@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useGamification } from '../context/GamificationContext';
 import DifficultySelector from '../components/DifficultySelector';
 import QuizEngine from '../components/QuizEngine';
 import chemistryQuestions from '../data/chemistryQuestions';
 
 function Chemistry() {
+    const { unlockedLevels } = useGamification();
     const [selectedDifficulty, setSelectedDifficulty] = useState(null);
 
     const handleDifficultySelect = (difficulty) => {
@@ -30,7 +32,9 @@ function Chemistry() {
                         </div>
 
                         <DifficultySelector
-                            onSelectDifficulty={handleDifficultySelect}
+                            selectedLevel={selectedDifficulty}
+                            unlockedLevels={unlockedLevels.chemistry}
+                            onSelect={handleDifficultySelect}
                             subject="chemistry"
                         />
 
