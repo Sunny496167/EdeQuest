@@ -76,7 +76,9 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                     chemistry: 'chemistry_wizard',
                     biology: 'biology_scholar',
                     economics: 'economics_expert',
-                    spanish: 'spanish_explorer'
+                    spanish: 'spanish_explorer',
+                    bengali: 'bengali_scholar',
+                    tamil: 'tamil_master'
                 };
 
                 if (badgeMap[subject]) {

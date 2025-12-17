@@ -19,7 +19,7 @@ function LanguagesCategory() {
                 </div>
 
                 {/* Language Subject Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* English */}
                     <SubjectCard
                         title="English"
@@ -48,6 +48,26 @@ function LanguagesCategory() {
                         color="bg-gradient-to-br from-red-200 to-orange-100"
                         link="/spanish"
                         progress={`${progress.spanish || 0}%`}
+                    />
+
+                    {/* Bengali */}
+                    <SubjectCard
+                        title="Bengali"
+                        emoji="🇧🇩"
+                        description="নমস্কার! Learn Bengali!"
+                        color="bg-gradient-to-br from-green-200 to-teal-100"
+                        link="/bengali"
+                        progress={`${progress.bengali || 0}%`}
+                    />
+
+                    {/* Tamil */}
+                    <SubjectCard
+                        title="Tamil"
+                        emoji="🏛️"
+                        description="வணக்கம்! Learn Tamil!"
+                        color="bg-gradient-to-br from-orange-200 to-red-100"
+                        link="/tamil"
+                        progress={`${progress.tamil || 0}%`}
                     />
                 </div>
 

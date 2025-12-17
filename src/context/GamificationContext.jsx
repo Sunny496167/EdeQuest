@@ -152,7 +152,21 @@ const AVAILABLE_BADGES = [
         name: 'Spanish Explorer',
         emoji: '🇪🇸',
         description: '¡Hola! Complete your first Spanish quiz',
-        unlockCondition: 'Complete Economics quiz'
+        unlockCondition: 'Complete Spanish quiz'
+    },
+    {
+        id: 'bengali_scholar',
+        name: 'Bengali Scholar',
+        emoji: '🇧🇩',
+        description: 'নমস্কার! Complete your first Bengali quiz',
+        unlockCondition: 'Complete Bengali quiz'
+    },
+    {
+        id: 'tamil_master',
+        name: 'Tamil Master',
+        emoji: '🇮🇳',
+        description: 'வணக்கம்! Complete your first Tamil quiz',
+        unlockCondition: 'Complete Tamil quiz'
     },
     {
         id: 'all_subjects',
@@ -202,7 +216,9 @@ export const GamificationProvider = ({ children }) => {
             chemistry: 0,
             biology: 0,
             economics: 0,
-            spanish: 0
+            spanish: 0,
+            bengali: 0,
+            tamil: 0
         };
     });
 
@@ -227,7 +243,9 @@ export const GamificationProvider = ({ children }) => {
             chemistry: ['easy'],
             biology: ['easy'],
             economics: ['easy'],
-            spanish: ['easy']
+            spanish: ['easy'],
+            bengali: ['easy'],
+            tamil: ['easy']
         };
     });
 
@@ -281,7 +299,9 @@ export const GamificationProvider = ({ children }) => {
             chemistry: 0,
             biology: 0,
             economics: 0,
-            spanish: 0
+            spanish: 0,
+            bengali: 0,
+            tamil: 0
         };
     });
 

@@ -31,7 +31,9 @@ function Progress() {
         languages: [
             { name: 'English', key: 'english', emoji: '📚' },
             { name: 'Hindi', key: 'hindi', emoji: '🇮🇳' },
-            { name: 'Spanish', key: 'spanish', emoji: '🇪🇸' }
+            { name: 'Spanish', key: 'spanish', emoji: '🇪🇸' },
+            { name: 'Bengali', key: 'bengali', emoji: '🇧🇩' },
+            { name: 'Tamil', key: 'tamil', emoji: '🏛️' }
         ],
         lifeValues: [
             { name: 'Civic Sense', key: 'civicsense', emoji: '🌟' },

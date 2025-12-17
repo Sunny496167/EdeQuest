@@ -9,6 +9,8 @@ import History from './pages/History';
 import English from './pages/English';
 import Hindi from './pages/Hindi';
 import Spanish from './pages/Spanish';
+import Bengali from './pages/Bengali';
+import Tamil from './pages/Tamil';
 import Civics from './pages/Civics';
 import CivicSense from './pages/CivicSense';
 import LifeSkills from './pages/LifeSkills';
@@ -61,6 +63,8 @@ function App() {
             <Route path="/english" element={<English />} />
             <Route path="/hindi" element={<Hindi />} />
             <Route path="/spanish" element={<Spanish />} />
+            <Route path="/bengali" element={<Bengali />} />
+            <Route path="/tamil" element={<Tamil />} />
             <Route path="/civics" element={<Civics />} />
             <Route path="/civic-sense" element={<CivicSense />} />
             <Route path="/life-skills" element={<LifeSkills />} />
