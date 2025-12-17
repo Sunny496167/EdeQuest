@@ -65,7 +65,13 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                     civics: 'civics_explorer',
                     civicsense: 'civic_sense_champion',
                     lifeskills: 'life_skills_master',
-                    environmental: 'environmental_hero'
+                    environmental: 'environmental_hero',
+                    fractions: 'fractions_master',
+                    geometry: 'geometry_expert',
+                    physics: 'physics_genius',
+                    chemistry: 'chemistry_wizard',
+                    biology: 'biology_scholar',
+                    economics: 'economics_expert'
                 };
 
                 if (badgeMap[subject]) {

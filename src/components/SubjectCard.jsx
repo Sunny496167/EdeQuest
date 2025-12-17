@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 // Check if user prefers reduced motion
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function SubjectCard({ title, emoji, description, color, progress = "0% Complete" }) {
+function SubjectCard({ title, emoji, description, color, progress = "0% Complete", link }) {
     const MotionComponent = prefersReducedMotion ? 'div' : motion.div;
 
-    return (
+    const cardContent = (
         <MotionComponent
             initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
             animate={prefersReducedMotion ? {} : { opacity: 1, scale: 1 }}
@@ -49,6 +50,18 @@ function SubjectCard({ title, emoji, description, color, progress = "0% Complete
             </div>
         </MotionComponent>
     );
+
+    // If link is provided, wrap in Link component
+    if (link) {
+        return (
+            <Link to={link} className="block">
+                {cardContent}
+            </Link>
+        );
+    }
+
+    // Otherwise return card without link
+    return cardContent;
 }
 
 export default SubjectCard;

@@ -106,6 +106,48 @@ const AVAILABLE_BADGES = [
         unlockCondition: 'Complete Environmental Studies quiz'
     },
     {
+        id: 'fractions_master',
+        name: 'Fractions Master',
+        emoji: '🍕',
+        description: 'Completed Fractions quiz!',
+        unlockCondition: 'Complete Fractions quiz'
+    },
+    {
+        id: 'geometry_expert',
+        name: 'Geometry Expert',
+        emoji: '📐',
+        description: 'Completed Geometry quiz!',
+        unlockCondition: 'Complete Geometry quiz'
+    },
+    {
+        id: 'physics_genius',
+        name: 'Physics Genius',
+        emoji: '⚡',
+        description: 'Completed Physics quiz!',
+        unlockCondition: 'Complete Physics quiz'
+    },
+    {
+        id: 'chemistry_wizard',
+        name: 'Chemistry Wizard',
+        emoji: '🧪',
+        description: 'Completed Chemistry quiz!',
+        unlockCondition: 'Complete Chemistry quiz'
+    },
+    {
+        id: 'biology_scholar',
+        name: 'Biology Scholar',
+        emoji: '🧬',
+        description: 'Completed Biology quiz!',
+        unlockCondition: 'Complete Biology quiz'
+    },
+    {
+        id: 'economics_expert',
+        name: 'Economics Expert',
+        emoji: '💰',
+        description: 'Completed Economics quiz!',
+        unlockCondition: 'Complete Economics quiz'
+    },
+    {
         id: 'all_subjects',
         name: 'Master Learner',
         emoji: '🏆',
@@ -164,7 +206,13 @@ export const GamificationProvider = ({ children }) => {
             civics: ['easy'],
             civicsense: ['easy'],
             lifeskills: ['easy'],
-            environmental: ['easy']
+            environmental: ['easy'],
+            fractions: ['easy'],
+            geometry: ['easy'],
+            physics: ['easy'],
+            chemistry: ['easy'],
+            biology: ['easy'],
+            economics: ['easy']
         };
     });
 

@@ -22,6 +22,7 @@ function Navbar() {
 
                 {/* Navigation Items */}
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+                    {/* Home */}
                     <NavLink
                         to="/"
                         onClick={handleClick}
@@ -36,8 +37,12 @@ function Navbar() {
                         <span>Home</span>
                     </NavLink>
 
+                    {/* Separator */}
+                    <div className="hidden md:block h-8 w-px bg-gray-300"></div>
+
+                    {/* Mathematics Category */}
                     <NavLink
-                        to="/math"
+                        to="/mathematics"
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
@@ -47,25 +52,12 @@ function Navbar() {
                         }
                     >
                         <span>📐</span>
-                        <span>Math</span>
+                        <span>Mathematics</span>
                     </NavLink>
 
+                    {/* Science Category */}
                     <NavLink
-                        to="/algebra"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🧮</span>
-                        <span>Algebra</span>
-                    </NavLink>
-
-                    <NavLink
-                        to="/science"
+                        to="/science-category"
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
@@ -78,8 +70,9 @@ function Navbar() {
                         <span>Science</span>
                     </NavLink>
 
+                    {/* Social Science Category */}
                     <NavLink
-                        to="/geography"
+                        to="/social-science"
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
@@ -89,25 +82,12 @@ function Navbar() {
                         }
                     >
                         <span>🌍</span>
-                        <span>Geography</span>
+                        <span>Social Science</span>
                     </NavLink>
 
+                    {/* Languages Category */}
                     <NavLink
-                        to="/history"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>⏳</span>
-                        <span>History</span>
-                    </NavLink>
-
-                    <NavLink
-                        to="/english"
+                        to="/languages"
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
@@ -117,39 +97,12 @@ function Navbar() {
                         }
                     >
                         <span>📚</span>
-                        <span>English</span>
+                        <span>Languages</span>
                     </NavLink>
 
+                    {/* Life & Values Category */}
                     <NavLink
-                        to="/hindi"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🇮🇳</span>
-                        <span>Hindi</span>
-                    </NavLink>
-
-                    <NavLink
-                        to="/civics"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>⚖️</span>
-                        <span>Civics</span>
-                    </NavLink>
-
-                    <NavLink
-                        to="/civic-sense"
+                        to="/life-values"
                         onClick={handleClick}
                         className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
@@ -159,37 +112,13 @@ function Navbar() {
                         }
                     >
                         <span>🌟</span>
-                        <span>Civic Sense</span>
+                        <span>Life & Values</span>
                     </NavLink>
 
-                    <NavLink
-                        to="/life-skills"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🧠</span>
-                        <span>Life Skills</span>
-                    </NavLink>
+                    {/* Separator */}
+                    <div className="hidden md:block h-8 w-px bg-gray-300"></div>
 
-                    <NavLink
-                        to="/environmental"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🌱</span>
-                        <span>Environmental</span>
-                    </NavLink>
-
+                    {/* Progress & Rewards */}
                     <NavLink
                         to="/progress"
                         onClick={handleClick}
