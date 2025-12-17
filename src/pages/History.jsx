@@ -118,7 +118,7 @@ function History() {
                             </p>
                         </div>
 
-                        <HistoryQuiz quiz={selectedStory.quiz} />
+                        <HistoryQuiz quiz={selectedStory.quiz} storyTitle={selectedStory.title} />
 
                         {/* Back Button */}
                         <div className="text-center mt-8">
