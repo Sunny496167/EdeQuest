@@ -107,6 +107,90 @@ function Navbar() {
                     </NavLink>
 
                     <NavLink
+                        to="/english"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>📚</span>
+                        <span>English</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/hindi"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🇮🇳</span>
+                        <span>Hindi</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/civics"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>⚖️</span>
+                        <span>Civics</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/civic-sense"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🌟</span>
+                        <span>Civic Sense</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/life-skills"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🧠</span>
+                        <span>Life Skills</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/environmental"
+                        onClick={handleClick}
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                ? 'bg-violet-600 text-white scale-105'
+                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                            }`
+                        }
+                    >
+                        <span>🌱</span>
+                        <span>Environmental</span>
+                    </NavLink>
+
+                    <NavLink
                         to="/progress"
                         onClick={handleClick}
                         className={({ isActive }) =>
