@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useGamification } from '../context/GamificationContext';
+import LottieSuccess from './LottieSuccess';
 
 function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', difficulty = 'easy', onComplete }) {
     const { addStar, incrementProgress, unlockBadge, unlockLevel, incrementDailySolved, incrementCompletedQuizzes, checkRewardConditions } = useGamification();
@@ -9,6 +10,7 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
     const [selectedOption, setSelectedOption] = useState(null);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [isAnswered, setIsAnswered] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     // Track if we've already counted this question for daily goal
     const questionCountedRef = useRef(false);
@@ -48,6 +50,8 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
         if (currentQuestionIndex === questions.length - 1) {
             // Quiz completed
             setTimeout(() => {
+                // Show Lottie success animation
+                setShowSuccess(true);
                 setFeedbackMessage('🎊 Amazing! You completed the quiz! 🎊');
 
                 // Update progress (10% per quiz completion)
@@ -248,6 +252,11 @@ function QuizEngine({ title, subtitle, questions, subject, emoji = '📝', diffi
                     </p>
                 </div>
             </div>
+
+            {/* Lottie Success Animation - Shows when quiz is completed */}
+            {showSuccess && (
+                <LottieSuccess onComplete={() => setShowSuccess(false)} />
+            )}
         </div>
     );
 }
