@@ -5,7 +5,7 @@
 PATTERN FOR ADDING PRONUNCIATION BUTTONS:
 
 1. Add import at top:
-import PronunciationButton from '../components/PronunciationButton';
+import PronunciationButton from '../components/features/PronunciationButton';
 
 2. For Words section, wrap the category badge area:
 <div className="flex items-center gap-2">
