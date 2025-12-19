@@ -6,6 +6,7 @@ import { useSubscription } from '../../context/SubscriptionContext';
 import StarsDisplay from '../ui/StarsDisplay';
 import SubscriptionBadge from '../subscription/SubscriptionBadge';
 import avatars from '../../data/common/avatars';
+import { LogOut, Menu, Users } from 'lucide-react';
 
 function Navbar() {
     const { stars, isDailyGoalCompleted } = useGamification();
@@ -16,6 +17,34 @@ function Navbar() {
     const trialInfo = getTrialInfo();
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+    // Navigation links configuration
+    const mainNavLinks = [
+        { to: '/', icon: '🏠', label: 'Home' }
+    ];
+
+    const categoryNavLinks = [
+        { to: '/mathematics', icon: '📐', label: 'Mathematics' },
+        { to: '/science-category', icon: '🔬', label: 'Science' },
+        { to: '/social-science', icon: '🌍', label: 'Social Science' },
+        { to: '/languages', icon: '📚', label: 'Languages' },
+        { to: '/life-values', icon: '🌟', label: 'Life & Values' }
+    ];
+
+    const userNavLinks = [
+        { to: '/progress', icon: '🎯', label: 'Progress' },
+        { to: '/rewards', icon: '🎁', label: 'Rewards' }
+    ];
+
+    const settingsNavLinks = [
+        { to: '/settings', icon: '⚙️', label: 'Settings' },
+        {
+            to: '/subscription',
+            icon: '💎',
+            label: 'Subscription',
+            badge: subscription ? <SubscriptionBadge plan={subscription.plan} size="sm" /> : null
+        }
+    ];
 
     // Scroll to top when navigating
     const handleClick = () => {
@@ -33,6 +62,35 @@ function Navbar() {
     // Get user's avatar emoji
     const userAvatar = avatars.find(a => a.id === user?.avatar);
 
+    // Render NavLink component
+    const renderNavLink = (link, isMobile = false) => (
+        <NavLink
+            key={link.to}
+            to={link.to}
+            onClick={handleClick}
+            className={({ isActive }) =>
+                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                    ? isMobile
+                        ? 'bg-violet-600 text-white'
+                        : 'bg-violet-600 text-white scale-105'
+                    : isMobile
+                        ? 'text-gray-700 hover:bg-violet-50'
+                        : 'text-gray-700 hover:text-violet-600 hover:scale-105'
+                }`
+            }
+        >
+            <span>{link.icon}</span>
+            {link.badge ? (
+                <div className="flex-1">
+                    <span>{link.label}</span>
+                    <div className="mt-1">{link.badge}</div>
+                </div>
+            ) : (
+                <span>{link.label}</span>
+            )}
+        </NavLink>
+    );
+
     return (
         <nav className="bg-white shadow-md rounded-2xl p-4 mb-6">
             <div className="flex items-center justify-between">
@@ -48,139 +106,25 @@ function Navbar() {
                     className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-violet-50 transition-colors"
                     aria-label="Toggle menu"
                 >
-                    <div className="flex flex-col gap-1.5">
-                        <span className={`block w-6 h-0.5 bg-violet-600 transition-all duration-300 ${showMobileMenu ? 'rotate-45 translate-y-2' : ''}`}></span>
-                        <span className={`block w-6 h-0.5 bg-violet-600 transition-all duration-300 ${showMobileMenu ? 'opacity-0' : ''}`}></span>
-                        <span className={`block w-6 h-0.5 bg-violet-600 transition-all duration-300 ${showMobileMenu ? '-rotate-45 -translate-y-2' : ''}`}></span>
-                    </div>
+                    <Menu className="w-6 h-6 text-violet-600" />
                 </button>
 
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex flex-wrap items-center justify-center gap-4 md:gap-6">
-                    {/* Home */}
-                    <NavLink
-                        to="/"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🏠</span>
-                        <span>Home</span>
-                    </NavLink>
+                    {/* Main Navigation */}
+                    {mainNavLinks.map(link => renderNavLink(link))}
 
                     {/* Separator */}
                     <div className="hidden md:block h-8 w-px bg-gray-300"></div>
 
-                    {/* Mathematics Category */}
-                    <NavLink
-                        to="/mathematics"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>📐</span>
-                        <span>Mathematics</span>
-                    </NavLink>
-
-                    {/* Science Category */}
-                    <NavLink
-                        to="/science-category"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🔬</span>
-                        <span>Science</span>
-                    </NavLink>
-
-                    {/* Social Science Category */}
-                    <NavLink
-                        to="/social-science"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🌍</span>
-                        <span>Social Science</span>
-                    </NavLink>
-
-                    {/* Languages Category */}
-                    <NavLink
-                        to="/languages"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>📚</span>
-                        <span>Languages</span>
-                    </NavLink>
-
-                    {/* Life & Values Category */}
-                    <NavLink
-                        to="/life-values"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🌟</span>
-                        <span>Life & Values</span>
-                    </NavLink>
+                    {/* Category Navigation */}
+                    {categoryNavLinks.map(link => renderNavLink(link))}
 
                     {/* Separator */}
                     <div className="hidden md:block h-8 w-px bg-gray-300"></div>
 
-                    {/* Progress & Rewards */}
-                    <NavLink
-                        to="/progress"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🎯</span>
-                        <span>Progress</span>
-                    </NavLink>
-
-                    <NavLink
-                        to="/rewards"
-                        onClick={handleClick}
-                        className={({ isActive }) =>
-                            `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                ? 'bg-violet-600 text-white scale-105'
-                                : 'text-gray-700 hover:text-violet-600 hover:scale-105'
-                            }`
-                        }
-                    >
-                        <span>🎁</span>
-                        <span>Rewards</span>
-                    </NavLink>
+                    {/* User Navigation */}
+                    {userNavLinks.map(link => renderNavLink(link))}
 
                     {/* Stars Display */}
                     <StarsDisplay stars={stars} />
@@ -188,8 +132,8 @@ function Navbar() {
                     {/* Daily Goal Indicator */}
                     {dailyGoalDone && (
                         <div className="flex items-center gap-1 text-lg">
-                            <span>🎯</span>
-                            <span>✅</span>
+                            <Target className="w-5 h-5 text-green-600" />
+                            <span className="text-green-600">✓</span>
                         </div>
                     )}
 
@@ -210,36 +154,28 @@ function Navbar() {
                         {/* Dropdown Menu */}
                         {showUserMenu && (
                             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border-2 border-gray-200 z-50">
-                                <NavLink
-                                    to="/settings"
-                                    onClick={() => {
-                                        handleClick();
-                                        setShowUserMenu(false);
-                                    }}
-                                    className="flex items-center gap-2 px-4 py-3 hover:bg-violet-50 transition-colors rounded-t-lg"
-                                >
-                                    <span>⚙️</span>
-                                    <span className="font-semibold text-gray-700">Settings</span>
-                                </NavLink>
-
-                                <NavLink
-                                    to="/subscription"
-                                    onClick={() => {
-                                        handleClick();
-                                        setShowUserMenu(false);
-                                    }}
-                                    className="flex items-center gap-2 px-4 py-3 hover:bg-violet-50 transition-colors"
-                                >
-                                    <span>💎</span>
-                                    <div className="flex-1">
-                                        <span className="font-semibold text-gray-700">Subscription</span>
-                                        {subscription && (
-                                            <div className="mt-1">
-                                                <SubscriptionBadge plan={subscription.plan} size="sm" />
+                                {settingsNavLinks.map((link, index) => (
+                                    <NavLink
+                                        key={link.to}
+                                        to={link.to}
+                                        onClick={() => {
+                                            handleClick();
+                                            setShowUserMenu(false);
+                                        }}
+                                        className={`flex items-center gap-2 px-4 py-3 hover:bg-violet-50 transition-colors ${index === 0 ? 'rounded-t-lg' : ''
+                                            }`}
+                                    >
+                                        <span>{link.icon}</span>
+                                        {link.badge ? (
+                                            <div className="flex-1">
+                                                <span className="font-semibold text-gray-700">{link.label}</span>
+                                                <div className="mt-1">{link.badge}</div>
                                             </div>
+                                        ) : (
+                                            <span className="font-semibold text-gray-700">{link.label}</span>
                                         )}
-                                    </div>
-                                </NavLink>
+                                    </NavLink>
+                                ))}
 
                                 {user?.role === 'parent' && (
                                     <NavLink
@@ -288,162 +224,23 @@ function Navbar() {
                         <div className="flex items-center justify-between px-3 py-2 bg-yellow-50 rounded-lg mb-2">
                             <StarsDisplay stars={stars} />
                             {dailyGoalDone && (
-                                <div className="flex items-center gap-1 text-lg">
-                                    <span>🎯</span>
-                                    <span>✅</span>
+                                <div className="flex items-center gap-1">
+                                    <Target className="w-5 h-5 text-green-600" />
+                                    <span className="text-green-600">✓</span>
                                 </div>
                             )}
                         </div>
 
                         {/* Navigation Links */}
-                        <NavLink
-                            to="/"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>🏠</span>
-                            <span>Home</span>
-                        </NavLink>
+                        {mainNavLinks.map(link => renderNavLink(link, true))}
 
-                        <NavLink
-                            to="/mathematics"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>📐</span>
-                            <span>Mathematics</span>
-                        </NavLink>
-
-                        <NavLink
-                            to="/science-category"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>🔬</span>
-                            <span>Science</span>
-                        </NavLink>
-
-                        <NavLink
-                            to="/social-science"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>🌍</span>
-                            <span>Social Science</span>
-                        </NavLink>
-
-                        <NavLink
-                            to="/languages"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>📚</span>
-                            <span>Languages</span>
-                        </NavLink>
-
-                        <NavLink
-                            to="/life-values"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>🌟</span>
-                            <span>Life & Values</span>
-                        </NavLink>
+                        {categoryNavLinks.map(link => renderNavLink(link, true))}
 
                         <div className="h-px bg-gray-300 my-2"></div>
 
-                        <NavLink
-                            to="/progress"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>🎯</span>
-                            <span>Progress</span>
-                        </NavLink>
+                        {userNavLinks.map(link => renderNavLink(link, true))}
 
-                        <NavLink
-                            to="/rewards"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>🎁</span>
-                            <span>Rewards</span>
-                        </NavLink>
-
-                        <NavLink
-                            to="/settings"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>⚙️</span>
-                            <span>Settings</span>
-                        </NavLink>
-
-                        <NavLink
-                            to="/subscription"
-                            onClick={handleClick}
-                            className={({ isActive }) =>
-                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
-                                    ? 'bg-violet-600 text-white'
-                                    : 'text-gray-700 hover:bg-violet-50'
-                                }`
-                            }
-                        >
-                            <span>💎</span>
-                            <div className="flex-1">
-                                <span>Subscription</span>
-                                {subscription && (
-                                    <div className="mt-1">
-                                        <SubscriptionBadge plan={subscription.plan} size="sm" />
-                                    </div>
-                                )}
-                            </div>
-                        </NavLink>
+                        {settingsNavLinks.map(link => renderNavLink(link, true))}
 
                         {user?.role === 'parent' && (
                             <NavLink
@@ -456,7 +253,7 @@ function Navbar() {
                                     }`
                                 }
                             >
-                                <span>👨‍👩‍👧</span>
+                                <Users className="w-5 h-5" />
                                 <span>Parent Dashboard</span>
                             </NavLink>
                         )}
@@ -468,9 +265,9 @@ function Navbar() {
                                 setShowMobileMenu(false);
                                 handleLogout();
                             }}
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 text-red-600 hover:bg-red-50"
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 text-red-600 hover:bg-red-50 w-full text-left"
                         >
-                            <span>🚪</span>
+                            <LogOut className="w-5 h-5" />
                             <span>Logout</span>
                         </button>
                     </div>
