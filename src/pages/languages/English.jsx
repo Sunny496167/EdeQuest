@@ -139,13 +139,13 @@ function English() {
                                     key={index}
                                     className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300"
                                 >
-                                    <div className="flex justify-between items-start mb-2">
-                                        <div className="text-2xl font-bold text-indigo-600">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                                        <div className="text-2xl font-bold text-indigo-600 break-words">
                                             {word.word}
                                         </div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             <PronunciationButton text={word.word} language="en-US" label="🔊" />
-                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">
                                                 {word.category}
                                             </span>
                                         </div>
@@ -153,7 +153,7 @@ function English() {
                                     <div className="text-sm text-gray-600 mb-2">
                                         {word.meaning}
                                     </div>
-                                    <div className="text-sm text-gray-700 italic">
+                                    <div className="text-sm text-gray-700 italic break-words">
                                         "{word.example}"
                                     </div>
                                 </div>
@@ -174,13 +174,13 @@ function English() {
                                     key={index}
                                     className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300"
                                 >
-                                    <div className="flex justify-between items-start mb-3">
-                                        <div className="text-xl font-bold text-blue-600 flex-1">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                                        <div className="text-xl font-bold text-blue-600 flex-1 break-words">
                                             {phrase.phrase}
                                         </div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             <PronunciationButton text={phrase.phrase} language="en-US" label="🔊" />
-                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">
                                                 {phrase.category}
                                             </span>
                                         </div>
@@ -188,7 +188,7 @@ function English() {
                                     <div className="text-sm text-gray-600 mb-2">
                                         <strong>Usage:</strong> {phrase.usage}
                                     </div>
-                                    <div className="text-sm text-gray-700 italic">
+                                    <div className="text-sm text-gray-700 italic break-words">
                                         "{phrase.example}"
                                     </div>
                                 </div>

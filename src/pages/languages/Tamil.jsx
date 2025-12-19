@@ -94,11 +94,11 @@ function Tamil() {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {popularWords.map((word, index) => (
                                 <div key={index} className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300">
-                                    <div className="flex justify-between items-start mb-2">
-                                        <div className="text-2xl font-bold text-red-600">{word.tamil}</div>
-                                        <div className="flex items-center gap-2">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                                        <div className="text-2xl font-bold text-red-600 break-words">{word.tamil}</div>
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             <PronunciationButton text={word.tamil} language="ta-IN" label="🔊" />
-                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">{word.category}</span>
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">{word.category}</span>
                                         </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-1 italic">{word.romanization}</div>
@@ -115,11 +115,11 @@ function Tamil() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {dailyPhrases.map((phrase, index) => (
                                 <div key={index} className="bg-gradient-to-br from-orange-100 to-red-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300">
-                                    <div className="flex justify-between items-start mb-3">
-                                        <div className="text-xl font-bold text-orange-600 flex-1">{phrase.tamil}</div>
-                                        <div className="flex items-center gap-2">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                                        <div className="text-xl font-bold text-orange-600 flex-1 break-words">{phrase.tamil}</div>
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             <PronunciationButton text={phrase.tamil} language="ta-IN" label="🔊" />
-                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">{phrase.category}</span>
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">{phrase.category}</span>
                                         </div>
                                     </div>
                                     <div className="text-sm text-gray-600 mb-2 italic">{phrase.romanization}</div>

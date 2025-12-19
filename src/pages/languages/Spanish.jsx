@@ -86,23 +86,23 @@ function Spanish() {
 
                 {/* Alphabet Tab */}
                 {activeTab === 'alphabet' && (
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-center">
                             Spanish Alphabet (27 Letters)
                         </h2>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
                             {spanishAlphabet.map((item) => (
                                 <div
                                     key={item.letter}
-                                    className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                    className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300 hover:scale-105"
                                 >
-                                    <div className="text-4xl font-bold text-violet-600 mb-2">
+                                    <div className="text-3xl md:text-4xl font-bold text-violet-600 mb-1 text-center">
                                         {item.letter}
                                     </div>
-                                    <div className="text-sm text-gray-700 mb-1">
+                                    <div className="text-xs text-gray-700 mb-1 text-center">
                                         <strong>Pronunciation:</strong> {item.pronunciation}
                                     </div>
-                                    <div className="text-sm text-gray-600">
+                                    <div className="text-xs text-gray-600 text-center">
                                         {item.example}
                                     </div>
                                 </div>
@@ -123,13 +123,13 @@ function Spanish() {
                                     key={index}
                                     className="bg-gradient-to-br from-red-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300"
                                 >
-                                    <div className="flex justify-between items-start mb-2">
-                                        <div className="text-2xl font-bold text-violet-600">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                                        <div className="text-2xl font-bold text-violet-600 break-words">
                                             {word.spanish}
                                         </div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             <PronunciationButton text={word.spanish} language="es-ES" label="🔊" />
-                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600">
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">
                                                 {word.category}
                                             </span>
                                         </div>
@@ -155,13 +155,13 @@ function Spanish() {
                                     key={index}
                                     className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300"
                                 >
-                                    <div className="flex justify-between items-start mb-3">
-                                        <div className="text-xl font-bold text-violet-600 flex-1">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                                        <div className="text-xl font-bold text-violet-600 flex-1 break-words">
                                             {phrase.spanish}
                                         </div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 flex-shrink-0">
                                             <PronunciationButton text={phrase.spanish} language="es-ES" label="🔊" />
-                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 ml-2">
+                                            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 whitespace-nowrap">
                                                 {phrase.category}
                                             </span>
                                         </div>
