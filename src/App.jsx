@@ -32,53 +32,273 @@ import Progress from './pages/user/Progress';
 import Rewards from './pages/user/Rewards';
 import Settings from './pages/user/Settings';
 import ParentDashboard from './pages/user/ParentDashboard';
+// Authentication Pages
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Signup';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import OnboardingFlow from './pages/auth/OnboardingFlow';
+// Contexts
 import { GamificationProvider } from './context/GamificationContext';
 import { AccessibilityProvider } from './context/AccessibilityContext';
+import { AuthProvider } from './context/AuthContext';
+// Route Protection
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import PublicRoute from './components/auth/PublicRoute';
+import OnboardingRoute from './components/auth/OnboardingRoute';
 
 function App() {
   return (
     <AccessibilityProvider>
-      <GamificationProvider>
-        <Layout>
+      <AuthProvider>
+        <GamificationProvider>
           <Routes>
-            <Route path="/" element={<Home />} />
+            {/* Public Authentication Routes */}
+            <Route path="/login" element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            } />
+            <Route path="/signup" element={
+              <PublicRoute>
+                <Signup />
+              </PublicRoute>
+            } />
+            <Route path="/forgot-password" element={
+              <PublicRoute>
+                <ForgotPassword />
+              </PublicRoute>
+            } />
+
+            {/* Onboarding Route */}
+            <Route path="/onboarding" element={
+              <OnboardingRoute>
+                <OnboardingFlow />
+              </OnboardingRoute>
+            } />
+
+            {/* Protected Routes with Layout */}
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Home />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
             {/* Category Pages */}
-            <Route path="/mathematics" element={<Mathematics />} />
-            <Route path="/science-category" element={<ScienceCategory />} />
-            <Route path="/social-science" element={<SocialScience />} />
-            <Route path="/languages" element={<LanguagesCategory />} />
-            <Route path="/life-values" element={<LifeValues />} />
+            <Route path="/mathematics" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Mathematics />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/science-category" element={
+              <ProtectedRoute>
+                <Layout>
+                  <ScienceCategory />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/social-science" element={
+              <ProtectedRoute>
+                <Layout>
+                  <SocialScience />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/languages" element={
+              <ProtectedRoute>
+                <Layout>
+                  <LanguagesCategory />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/life-values" element={
+              <ProtectedRoute>
+                <Layout>
+                  <LifeValues />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
             {/* Subject Pages */}
-            <Route path="/math" element={<Math />} />
-            <Route path="/algebra" element={<Algebra />} />
-            <Route path="/fractions" element={<Fractions />} />
-            <Route path="/geometry" element={<Geometry />} />
-            <Route path="/science" element={<Science />} />
-            <Route path="/physics" element={<Physics />} />
-            <Route path="/chemistry" element={<Chemistry />} />
-            <Route path="/biology" element={<Biology />} />
-            <Route path="/geography" element={<Geography />} />
-            <Route path="/history" element={<History />} />
-            <Route path="/economics" element={<Economics />} />
-            <Route path="/english" element={<English />} />
-            <Route path="/hindi" element={<Hindi />} />
-            <Route path="/spanish" element={<Spanish />} />
-            <Route path="/bengali" element={<Bengali />} />
-            <Route path="/tamil" element={<Tamil />} />
-            <Route path="/civics" element={<Civics />} />
-            <Route path="/civic-sense" element={<CivicSense />} />
-            <Route path="/life-skills" element={<LifeSkills />} />
-            <Route path="/environmental" element={<EnvironmentalStudies />} />
-            {/* Other Pages */}
-            <Route path="/progress" element={<Progress />} />
-            <Route path="/rewards" element={<Rewards />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/parent" element={<ParentDashboard />} />
+            <Route path="/math" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Math />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/algebra" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Algebra />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/fractions" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Fractions />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/geometry" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Geometry />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/science" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Science />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/physics" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Physics />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/chemistry" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Chemistry />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/biology" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Biology />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/geography" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Geography />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/history" element={
+              <ProtectedRoute>
+                <Layout>
+                  <History />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/economics" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Economics />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/english" element={
+              <ProtectedRoute>
+                <Layout>
+                  <English />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/hindi" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Hindi />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/spanish" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Spanish />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/bengali" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Bengali />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/tamil" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Tamil />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/civics" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Civics />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/civic-sense" element={
+              <ProtectedRoute>
+                <Layout>
+                  <CivicSense />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/life-skills" element={
+              <ProtectedRoute>
+                <Layout>
+                  <LifeSkills />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/environmental" element={
+              <ProtectedRoute>
+                <Layout>
+                  <EnvironmentalStudies />
+                </Layout>
+              </ProtectedRoute>
+            } />
+
+            {/* User Pages */}
+            <Route path="/progress" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Progress />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/rewards" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Rewards />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+                <Layout>
+                  <Settings />
+                </Layout>
+              </ProtectedRoute>
+            } />
+            <Route path="/parent" element={
+              <ProtectedRoute>
+                <Layout>
+                  <ParentDashboard />
+                </Layout>
+              </ProtectedRoute>
+            } />
           </Routes>
-        </Layout>
-      </GamificationProvider>
+        </GamificationProvider>
+      </AuthProvider>
     </AccessibilityProvider>
   );
 }
 
 export default App;
+

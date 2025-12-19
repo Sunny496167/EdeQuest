@@ -152,6 +152,11 @@
   .delay-200 { animation-delay: 0.2s; }
   .delay-300 { animation-delay: 0.3s; }
 
+  /* Additional Fade Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-in-out both;
+  }
+
   /* Hover Effects */
   .hover-lift {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
