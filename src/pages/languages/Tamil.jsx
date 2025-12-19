@@ -31,9 +31,9 @@ function Tamil() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50 py-6 px-3">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-12">
+                <div className="text-center mb-6">
                     <div className="text-6xl mb-4">🇮🇳</div>
                     <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         தமிழ் கற்க (Learn Tamil)
@@ -43,7 +43,7 @@ function Tamil() {
                     </p>
                 </div>
 
-                <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                <div className="flex justify-center gap-2 mb-4 flex-wrap">
                     <button onClick={() => setActiveTab('alphabet')} className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet' ? 'bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-lg' : 'bg-white text-gray-700 hover:bg-gray-100'}`}>
                         📝 Tamil Alphabet
                     </button>
@@ -65,7 +65,7 @@ function Tamil() {
                             <h3 className="text-2xl font-bold text-red-600 mb-4">உயிரெழுத்து (Vowels) - 12</h3>
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 {tamilAlphabet.vowels.map((item, index) => (
-                                    <div key={index} className="bg-gradient-to-br from-red-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                                    <div key={index} className="bg-gradient-to-br from-red-100 to-orange-100 rounded-xl p-2 hover:shadow-lg transition-all duration-300 hover:scale-105">
                                         <div className="text-5xl font-bold text-red-600 mb-2 text-center">{item.tamil}</div>
                                         <div className="text-sm text-gray-700 mb-1 text-center"><strong>{item.romanization}</strong> ({item.pronunciation})</div>
                                         <div className="text-xs text-gray-600 text-center">{item.example}</div>
@@ -77,7 +77,7 @@ function Tamil() {
                             <h3 className="text-2xl font-bold text-orange-600 mb-4">மெய்யெழுத்து (Consonants) - 18</h3>
                             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                 {tamilAlphabet.consonants.map((item, index) => (
-                                    <div key={index} className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                                    <div key={index} className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-xl p-2 hover:shadow-lg transition-all duration-300 hover:scale-105">
                                         <div className="text-4xl font-bold text-orange-600 mb-2 text-center">{item.tamil}</div>
                                         <div className="text-sm text-gray-700 mb-1 text-center"><strong>{item.romanization}</strong></div>
                                         <div className="text-xs text-gray-600 text-center">{item.example}</div>
@@ -93,7 +93,7 @@ function Tamil() {
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">100 பிரபலமான சொற்கள் (100 Popular Words)</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {popularWords.map((word, index) => (
-                                <div key={index} className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300">
+                                <div key={index} className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300">
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
                                         <div className="text-2xl font-bold text-red-600 break-words">{word.tamil}</div>
                                         <div className="flex items-center gap-2 flex-shrink-0">
@@ -114,7 +114,7 @@ function Tamil() {
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">100 தினசரி சொற்றொடர்கள் (100 Daily Phrases)</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {dailyPhrases.map((phrase, index) => (
-                                <div key={index} className="bg-gradient-to-br from-orange-100 to-red-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300">
+                                <div key={index} className="bg-gradient-to-br from-orange-100 to-red-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300">
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                                         <div className="text-xl font-bold text-orange-600 flex-1 break-words">{phrase.tamil}</div>
                                         <div className="flex items-center gap-2 flex-shrink-0">

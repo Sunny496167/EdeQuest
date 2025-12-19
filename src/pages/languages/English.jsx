@@ -31,10 +31,10 @@ function English() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-6 px-3">
             <div className="max-w-6xl mx-auto">
                 {/* Page Header */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-6">
                     <div className="text-6xl mb-4">📚</div>
                     <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         Learn English
@@ -45,7 +45,7 @@ function English() {
                 </div>
 
                 {/* Tab Navigation */}
-                <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                <div className="flex justify-center gap-2 mb-4 flex-wrap">
                     <button
                         onClick={() => setActiveTab('alphabet')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet'
@@ -86,15 +86,15 @@ function English() {
 
                 {/* Alphabet Tab */}
                 {activeTab === 'alphabet' && (
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <div className="bg-white rounded-xl p-3 md:p-4 shadow-lg">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 text-center">
                             English Alphabet (26 Letters)
                         </h2>
-                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                             {englishAlphabet.map((item) => (
                                 <div
                                     key={item.letter}
-                                    className={`rounded-xl p-4 hover:shadow-lg transition-all duration-300 hover:scale-105 ${item.type === 'vowel'
+                                    className={`rounded-xl p-2 hover:shadow-lg transition-all duration-300 hover:scale-105 ${item.type === 'vowel'
                                         ? 'bg-gradient-to-br from-purple-100 to-pink-100'
                                         : 'bg-gradient-to-br from-blue-100 to-indigo-100'
                                         }`}
@@ -129,15 +129,15 @@ function English() {
 
                 {/* Popular Words Tab */}
                 {activeTab === 'words' && (
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <div className="bg-white rounded-xl p-3 md:p-4 shadow-lg">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 text-center">
                             100 Popular English Words
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                             {popularWords.map((word, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300"
+                                    className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
                                         <div className="text-2xl font-bold text-indigo-600 break-words">
@@ -164,15 +164,15 @@ function English() {
 
                 {/* Daily Phrases Tab */}
                 {activeTab === 'phrases' && (
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
+                    <div className="bg-white rounded-xl p-3 md:p-4 shadow-lg">
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
                             100 Daily English Phrases
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {dailyPhrases.map((phrase, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300"
+                                    className="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                                         <div className="text-xl font-bold text-blue-600 flex-1 break-words">

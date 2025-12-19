@@ -31,10 +31,10 @@ function Spanish() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 py-6 px-3">
             <div className="max-w-6xl mx-auto">
                 {/* Page Header */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-6">
                     <div className="text-6xl mb-4">🇪🇸</div>
                     <h1 className="text-4xl md:text-5xl font-bold text-violet-600 mb-3">
                         Learn Spanish
@@ -45,7 +45,7 @@ function Spanish() {
                 </div>
 
                 {/* Tab Navigation */}
-                <div className="flex justify-center gap-4 mb-8 flex-wrap">
+                <div className="flex justify-center gap-2 mb-4 flex-wrap">
                     <button
                         onClick={() => setActiveTab('alphabet')}
                         className={`px-6 py-3 rounded-xl font-bold transition-all duration-300 ${activeTab === 'alphabet'
@@ -86,15 +86,15 @@ function Spanish() {
 
                 {/* Alphabet Tab */}
                 {activeTab === 'alphabet' && (
-                    <div className="bg-white rounded-2xl p-4 md:p-8 shadow-lg">
-                        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-center">
+                    <div className="bg-white rounded-xl p-3 md:p-4 shadow-lg">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 text-center">
                             Spanish Alphabet (27 Letters)
                         </h2>
-                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
                             {spanishAlphabet.map((item) => (
                                 <div
                                     key={item.letter}
-                                    className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300 hover:scale-105"
+                                    className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-lg p-2 hover:shadow-lg transition-all duration-300 hover:scale-105"
                                 >
                                     <div className="text-3xl md:text-4xl font-bold text-violet-600 mb-1 text-center">
                                         {item.letter}
@@ -113,15 +113,15 @@ function Spanish() {
 
                 {/* Popular Words Tab */}
                 {activeTab === 'words' && (
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <div className="bg-white rounded-xl p-3 md:p-4 shadow-lg">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-3 text-center">
                             100 Popular Spanish Words
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                             {popularWords.map((word, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gradient-to-br from-red-100 to-orange-100 rounded-xl p-4 hover:shadow-lg transition-all duration-300"
+                                    className="bg-gradient-to-br from-red-100 to-orange-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
                                         <div className="text-2xl font-bold text-violet-600 break-words">
@@ -145,15 +145,15 @@ function Spanish() {
 
                 {/* Daily Phrases Tab */}
                 {activeTab === 'phrases' && (
-                    <div className="bg-white rounded-2xl p-8 shadow-lg">
+                    <div className="bg-white rounded-xl p-3 md:p-4 shadow-lg">
                         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
                             100 Daily Spanish Phrases
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             {dailyPhrases.map((phrase, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300"
+                                    className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-lg p-3 hover:shadow-lg transition-all duration-300"
                                 >
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                                         <div className="text-xl font-bold text-violet-600 flex-1 break-words">

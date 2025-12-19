@@ -9,7 +9,7 @@ function Layout({ children }) {
                 <Navbar />
 
                 {/* Main Content Area */}
-                <main className="bg-white rounded-2xl shadow-lg p-6 md:p-10">
+                <main className="bg-white rounded-2xl shadow-lg p-3 md:p-10">
                     {children}
                 </main>
             </div>
