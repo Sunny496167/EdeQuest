@@ -2,14 +2,18 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useGamification } from '../../context/GamificationContext';
 import { useAuth } from '../../context/AuthContext';
+import { useSubscription } from '../../context/SubscriptionContext';
 import StarsDisplay from '../ui/StarsDisplay';
+import SubscriptionBadge from '../subscription/SubscriptionBadge';
 import avatars from '../../data/common/avatars';
 
 function Navbar() {
     const { stars, isDailyGoalCompleted } = useGamification();
     const { user, logout } = useAuth();
+    const { subscription, getTrialInfo } = useSubscription();
     const navigate = useNavigate();
     const dailyGoalDone = isDailyGoalCompleted();
+    const trialInfo = getTrialInfo();
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -218,6 +222,25 @@ function Navbar() {
                                     <span className="font-semibold text-gray-700">Settings</span>
                                 </NavLink>
 
+                                <NavLink
+                                    to="/subscription"
+                                    onClick={() => {
+                                        handleClick();
+                                        setShowUserMenu(false);
+                                    }}
+                                    className="flex items-center gap-2 px-4 py-3 hover:bg-violet-50 transition-colors"
+                                >
+                                    <span>💎</span>
+                                    <div className="flex-1">
+                                        <span className="font-semibold text-gray-700">Subscription</span>
+                                        {subscription && (
+                                            <div className="mt-1">
+                                                <SubscriptionBadge plan={subscription.plan} size="sm" />
+                                            </div>
+                                        )}
+                                    </div>
+                                </NavLink>
+
                                 {user?.role === 'parent' && (
                                     <NavLink
                                         to="/parent"
@@ -399,6 +422,27 @@ function Navbar() {
                         >
                             <span>⚙️</span>
                             <span>Settings</span>
+                        </NavLink>
+
+                        <NavLink
+                            to="/subscription"
+                            onClick={handleClick}
+                            className={({ isActive }) =>
+                                `flex items-center gap-2 px-3 py-2 rounded-lg font-semibold transition-all duration-200 ${isActive
+                                    ? 'bg-violet-600 text-white'
+                                    : 'text-gray-700 hover:bg-violet-50'
+                                }`
+                            }
+                        >
+                            <span>💎</span>
+                            <div className="flex-1">
+                                <span>Subscription</span>
+                                {subscription && (
+                                    <div className="mt-1">
+                                        <SubscriptionBadge plan={subscription.plan} size="sm" />
+                                    </div>
+                                )}
+                            </div>
                         </NavLink>
 
                         {user?.role === 'parent' && (
