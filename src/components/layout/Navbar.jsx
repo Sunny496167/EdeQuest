@@ -32,6 +32,7 @@ function Navbar() {
     ];
 
     const userNavLinks = [
+        { to: '/analytics', icon: '📊', label: 'Analytics' },
         { to: '/progress', icon: '🎯', label: 'Progress' },
         { to: '/rewards', icon: '🎁', label: 'Rewards' }
     ];
