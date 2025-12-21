@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './pages/home/Home';
 import Math from './pages/mathematics/Math';
@@ -66,6 +66,8 @@ import ContentControls from './pages/parent/ContentControls';
 import GoalsAndRewards from './pages/parent/GoalsAndRewards';
 import CommunicationCenter from './pages/parent/CommunicationCenter';
 import ParentSettings from './pages/parent/ParentSettings';
+import ReportsAndInsights from './pages/parent/ReportsAndInsights';
+
 
 
 function App() {
@@ -311,13 +313,14 @@ function App() {
                       </Layout>
                     </ProtectedRoute>
                   } />
+
+                  {/* Redirect old parent route to new parent portal */}
                   <Route path="/parent" element={
                     <ProtectedRoute>
-                      <Layout>
-                        <ParentDashboard />
-                      </Layout>
+                      <Navigate to="/parent/dashboard" replace />
                     </ProtectedRoute>
                   } />
+
 
                   {/* Parent Portal Routes */}
                   <Route path="/parent/dashboard" element={
@@ -365,6 +368,12 @@ function App() {
                       <ParentSettings />
                     </ProtectedRoute>
                   } />
+                  <Route path="/parent/reports" element={
+                    <ProtectedRoute>
+                      <ReportsAndInsights />
+                    </ProtectedRoute>
+                  } />
+
 
                   {/* Subscription Routes */}
                   <Route path="/pricing" element={

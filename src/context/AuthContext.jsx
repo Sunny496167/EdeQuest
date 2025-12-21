@@ -17,32 +17,56 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true); // Start as loading
     const [lastVisitedPath, setLastVisitedPath] = useState('/');
 
-    // Auto-login for development (remove in production)
+    // Initialize auth state from localStorage or auto-login
     useEffect(() => {
-        // Check if we should auto-login (for development)
-        const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost';
+        const initializeAuth = () => {
+            // Check if we should auto-login (for development)
+            const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost';
 
-        if (isDevelopment && !isAuthenticated) {
-            // Auto-login with a mock user
-            const mockUser = {
-                id: 'dev_user_123',
-                name: 'Test Parent',
-                email: 'parent@test.com',
-                role: 'parent', // Set as parent for testing parent portal
-                avatar: 1,
-                gradeLevel: 5,
-                interests: [],
-                dailyGoal: 30,
-                createdAt: new Date().toISOString(),
-                onboardingCompleted: true
-            };
+            // First, try to load from localStorage
+            const storedUser = localStorage.getItem('user');
 
-            setUser(mockUser);
-            setIsAuthenticated(true);
-        }
+            if (storedUser) {
+                try {
+                    const parsedUser = JSON.parse(storedUser);
+                    setUser(parsedUser);
+                    setIsAuthenticated(true);
+                    setIsLoading(false);
+                    return;
+                } catch (error) {
+                    console.error('Failed to parse stored user:', error);
+                    localStorage.removeItem('user');
+                }
+            }
+
+            // If no stored user and in development, auto-login
+            if (isDevelopment) {
+                const mockUser = {
+                    id: 'dev_user_123',
+                    name: 'Test Parent',
+                    email: 'parent@test.com',
+                    role: 'parent',
+                    avatar: 1,
+                    gradeLevel: 5,
+                    interests: [],
+                    dailyGoal: 30,
+                    createdAt: new Date().toISOString(),
+                    onboardingCompleted: true
+                };
+
+                // Store in localStorage for persistence
+                localStorage.setItem('user', JSON.stringify(mockUser));
+                setUser(mockUser);
+                setIsAuthenticated(true);
+            }
+
+            setIsLoading(false);
+        };
+
+        initializeAuth();
     }, []);
 
 
@@ -73,6 +97,8 @@ export const AuthProvider = ({ children }) => {
                 onboardingCompleted: true // Skip onboarding for login
             };
 
+            // Store in localStorage
+            localStorage.setItem('user', JSON.stringify(mockUser));
             setUser(mockUser);
             setIsAuthenticated(true);
             setIsLoading(false);
@@ -111,6 +137,8 @@ export const AuthProvider = ({ children }) => {
                 onboardingCompleted: false // New users need onboarding
             };
 
+            // Store in localStorage
+            localStorage.setItem('user', JSON.stringify(newUser));
             setUser(newUser);
             setIsAuthenticated(true);
             setIsLoading(false);
@@ -124,6 +152,7 @@ export const AuthProvider = ({ children }) => {
 
     // Logout function
     const logout = () => {
+        localStorage.removeItem('user');
         setUser(null);
         setIsAuthenticated(false);
         setLastVisitedPath('/');
@@ -131,20 +160,24 @@ export const AuthProvider = ({ children }) => {
 
     // Update user profile
     const updateUser = (updates) => {
-        setUser(prev => ({
-            ...prev,
+        const updatedUser = {
+            ...user,
             ...updates
-        }));
+        };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        setUser(updatedUser);
     };
 
     // Complete onboarding
     const completeOnboarding = (onboardingData) => {
-        setUser(prev => ({
-            ...prev,
-            avatar: onboardingData.avatar || prev.avatar,
-            dailyGoal: onboardingData.dailyGoal || prev.dailyGoal,
+        const updatedUser = {
+            ...user,
+            avatar: onboardingData.avatar || user.avatar,
+            dailyGoal: onboardingData.dailyGoal || user.dailyGoal,
             onboardingCompleted: true
-        }));
+        };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        setUser(updatedUser);
     };
 
     // Store last visited path for redirect after login
