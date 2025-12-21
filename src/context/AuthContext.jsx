@@ -20,6 +20,32 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [lastVisitedPath, setLastVisitedPath] = useState('/');
 
+    // Auto-login for development (remove in production)
+    useEffect(() => {
+        // Check if we should auto-login (for development)
+        const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost';
+
+        if (isDevelopment && !isAuthenticated) {
+            // Auto-login with a mock user
+            const mockUser = {
+                id: 'dev_user_123',
+                name: 'Test Parent',
+                email: 'parent@test.com',
+                role: 'parent', // Set as parent for testing parent portal
+                avatar: 1,
+                gradeLevel: 5,
+                interests: [],
+                dailyGoal: 30,
+                createdAt: new Date().toISOString(),
+                onboardingCompleted: true
+            };
+
+            setUser(mockUser);
+            setIsAuthenticated(true);
+        }
+    }, []);
+
+
     // Mock login function - accepts any email/password
     const login = async (email, password) => {
         setIsLoading(true);
