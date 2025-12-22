@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Home from './pages/home/Home';
+import Dashboard from './pages/home/Dashboard';
 import Math from './pages/mathematics/Math';
 import Algebra from './pages/mathematics/Algebra';
 import Science from './pages/science/Science';
@@ -103,11 +104,14 @@ function App() {
                     </OnboardingRoute>
                   } />
 
-                  {/* Protected Routes with Layout */}
-                  <Route path="/" element={
+                  {/* Public Home Page - Landing Page */}
+                  <Route path="/" element={<Home />} />
+
+                  {/* Protected Dashboard Route */}
+                  <Route path="/dashboard" element={
                     <ProtectedRoute>
                       <Layout>
-                        <Home />
+                        <Dashboard />
                       </Layout>
                     </ProtectedRoute>
                   } />
