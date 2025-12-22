@@ -34,8 +34,9 @@ import { useNavigate } from 'react-router-dom';
  *    - Reduces page weight significantly
  */
 
-// OPTIMIZATION: Hero loads immediately (critical for First Contentful Paint)
-// This is above the fold and needs to be visible instantly
+// OPTIMIZATION: Header and Hero load immediately (critical for First Contentful Paint)
+// These are above the fold and need to be visible instantly
+import LandingHeader from '../../components/landing/LandingHeader';
 import HeroSection from '../../components/landing/HeroSection';
 
 // OPTIMIZATION: Lazy load all below-the-fold sections
@@ -97,6 +98,9 @@ const Landing = () => {
 
             {/* OPTIMIZATION: Smooth scroll behavior set via CSS in index.css */}
             <div className="landing-page">
+                {/* HEADER - Sticky navigation with auth buttons */}
+                <LandingHeader />
+
                 {/* SECTION 1: HERO - Loads immediately (no lazy loading) */}
                 <HeroSection onCTAClick={handleCTAClick} />
 
@@ -114,7 +118,9 @@ const Landing = () => {
 
                 <Suspense fallback={<LoadingFallback />}>
                     {/* SECTION 4: FEATURES - Lazy loaded */}
-                    <FeaturesSection />
+                    <div id="features">
+                        <FeaturesSection />
+                    </div>
                 </Suspense>
 
                 <Suspense fallback={<LoadingFallback />}>
@@ -124,7 +130,9 @@ const Landing = () => {
 
                 <Suspense fallback={<LoadingFallback />}>
                     {/* SECTION 6: CURRICULUM - Lazy loaded */}
-                    <CurriculumShowcase />
+                    <div id="curriculum">
+                        <CurriculumShowcase />
+                    </div>
                 </Suspense>
 
                 <Suspense fallback={<LoadingFallback />}>
@@ -139,7 +147,9 @@ const Landing = () => {
 
                 <Suspense fallback={<LoadingFallback />}>
                     {/* SECTION 9: PRICING - Lazy loaded */}
-                    <PricingSection onCTAClick={handleCTAClick} />
+                    <div id="pricing">
+                        <PricingSection onCTAClick={handleCTAClick} />
+                    </div>
                 </Suspense>
 
                 <Suspense fallback={<LoadingFallback />}>
@@ -154,7 +164,9 @@ const Landing = () => {
 
                 <Suspense fallback={<LoadingFallback />}>
                     {/* SECTION 12: FAQ - Lazy loaded */}
-                    <FAQSection />
+                    <div id="faq">
+                        <FAQSection />
+                    </div>
                 </Suspense>
 
                 <Suspense fallback={<LoadingFallback />}>
