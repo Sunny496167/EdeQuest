@@ -32,6 +32,21 @@ export class User {
     // Optional: field to store profile picture URL
     @Prop({ required: false })
     picture?: string;
+
+    @Prop({ type: [String], enum: ['user', 'admin'], default: ['user'] })
+    roles: string[];
+
+    @Prop({ default: false })
+    isVerified: boolean;
+
+    @Prop()
+    verificationToken?: string;
+
+    @Prop()
+    resetPasswordToken?: string;
+
+    @Prop()
+    resetPasswordExpires?: Date;
 }
 
 // SchemaFactory.createForClass generates the Mongoose schema from the decorated class.
