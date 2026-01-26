@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, IsOptional } from 'class-validator';
 
 export class CreateUserDto {
     @IsString()
@@ -8,4 +8,8 @@ export class CreateUserDto {
     @IsEmail()
     @IsNotEmpty()
     email: string;
+
+    @IsString()
+    @IsOptional() // Optional because Google Auth users won't have a password initially
+    password?: string;
 }
