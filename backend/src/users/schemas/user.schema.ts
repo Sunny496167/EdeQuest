@@ -47,6 +47,22 @@ export class User {
 
     @Prop()
     resetPasswordExpires?: Date;
+
+    // Security: Failed login attempt tracking
+    @Prop({ default: 0 })
+    failedLoginAttempts: number;
+
+    @Prop()
+    accountLockedUntil?: Date;
+
+    @Prop()
+    lastLoginAt?: Date;
+
+    @Prop()
+    lastLoginIp?: string;
+
+    @Prop()
+    lastLoginUserAgent?: string;
 }
 
 // SchemaFactory.createForClass generates the Mongoose schema from the decorated class.
