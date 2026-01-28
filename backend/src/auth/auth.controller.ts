@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Get, Req, Res, UnauthorizedException, Query, HttpCode, HttpStatus, Ip } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Get, Req, Res, UnauthorizedException, Query, HttpCode, HttpStatus, Ip, Delete, Param } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
@@ -160,5 +160,88 @@ export class AuthController {
     @ApiResponse({ status: 400, description: 'Invalid or expired token' })
     async resetPassword(@Body() body: { token: string, password: string }) {
         return this.authService.resetPassword(body.token, body);
+    }
+
+    // ==================== SESSION MANAGEMENT ====================
+
+    @Get('sessions')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({
+        summary: 'Get all active sessions for current user',
+        description: 'Returns list of all active login sessions across devices with device information, location, and last activity'
+    })
+    @ApiResponse({
+        status: 200,
+        description: 'Active sessions retrieved successfully',
+        schema: {
+            example: {
+                sessions: [
+                    {
+                        id: '507f1f77bcf86cd799439011',
+                        deviceName: 'Chrome on Windows 10',
+                        browser: 'Chrome 120.0',
+                        os: 'Windows 10',
+                        ipAddress: '192.168.1.100',
+                        location: 'San Francisco, CA',
+                        createdAt: '2026-01-20T08:00:00Z',
+                        lastUsedAt: '2026-01-28T10:30:00Z',
+                        expiresAt: '2026-01-27T08:00:00Z',
+                        isCurrent: true
+                    },
+                    {
+                        id: '507f1f77bcf86cd799439012',
+                        deviceName: 'Safari on iPhone',
+                        browser: 'Safari 17.0',
+                        os: 'iOS 17.2',
+                        ipAddress: '192.168.1.101',
+                        location: 'San Francisco, CA',
+                        createdAt: '2026-01-25T14:00:00Z',
+                        lastUsedAt: '2026-01-27T16:00:00Z',
+                        expiresAt: '2026-02-01T14:00:00Z',
+                        isCurrent: false
+                    }
+                ],
+                total: 2
+            }
+        }
+    })
+    @ApiBearerAuth('JWT-auth')
+    async getSessions(@Req() req) {
+        const userId = req.user.userId;
+        const sessions = await this.authService.getActiveSessions(userId);
+
+        // TODO: Mark current session based on the current token
+        // This would require comparing the current request's refresh token
+        // For now, mark the most recently used session
+        if (sessions.length > 0) {
+            sessions[0].isCurrent = true;
+        }
+
+        return {
+            sessions,
+            total: sessions.length
+        };
+    }
+
+    @Delete('sessions/:id')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({
+        summary: 'Revoke a specific session (logout from one device)',
+        description: 'Revokes the refresh token for a specific session, logging out that device only'
+    })
+    @ApiResponse({ status: 200, description: 'Session revoked successfully' })
+    @ApiResponse({ status: 404, description: 'Session not found' })
+    @ApiBearerAuth('JWT-auth')
+    async revokeSession(@Req() req, @Param('id') sessionId: string) {
+        const userId = req.user.userId;
+        const ipAddress = req.ip || req.socket.remoteAddress;
+        const userAgent = req.get('user-agent');
+
+        await this.authService.revokeSession(userId, sessionId, ipAddress, userAgent);
+
+        return {
+            message: 'Session revoked successfully',
+            sessionId
+        };
     }
 }

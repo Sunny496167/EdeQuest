@@ -11,6 +11,7 @@ import { MailService } from '../mail/mail.service';
 import { RefreshToken, RefreshTokenDocument } from './schemas/refresh-token.schema';
 import { AuditService } from '../audit/audit.service';
 import { AuditAction, AuditCategory, AuditSeverity } from '../audit/schemas/audit-log.schema';
+import { parseUserAgent, getLocationFromIP } from './utils/device-parser.util';
 
 // Account lockout configuration
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -167,7 +168,7 @@ export class AuthService {
     }
 
     /**
-     * Generates a new refresh token and stores it in the database.
+     * Generates a new refresh token and stores it in the database with device information.
      */
     private async generateRefreshToken(
         userId: string,
@@ -178,12 +179,21 @@ export class AuthService {
         const expiresAt = new Date();
         expiresAt.setDate(expiresAt.getDate() + REFRESH_TOKEN_EXPIRY_DAYS);
 
+        // Parse device information from user agent
+        const deviceInfo = parseUserAgent(userAgent);
+        const location = getLocationFromIP(ipAddress);
+
         await this.refreshTokenModel.create({
             userId,
             token,
             expiresAt,
             ipAddress,
             userAgent,
+            deviceName: deviceInfo.deviceName,
+            browser: deviceInfo.browser,
+            os: deviceInfo.os,
+            location,
+            lastUsedAt: new Date(),
         });
 
         return token;
@@ -227,6 +237,9 @@ export class AuthService {
         const accessToken = this.jwtService.sign(payload, {
             expiresIn: '15m',
         });
+
+        // Update session activity for the new token
+        await this.updateSessionActivity(newRefreshToken);
 
         // Log token refresh
         await this.auditService.logEvent({
@@ -397,5 +410,93 @@ export class AuthService {
             } as any) as any;
         }
         return user;
+    }
+
+    // ==================== SESSION MANAGEMENT ====================
+
+    /**
+     * Gets all active sessions for a user (excludes revoked and expired).
+     * Returns sessions sorted by last used (most recent first).
+     */
+    async getActiveSessions(userId: string): Promise<any[]> {
+        const now = new Date();
+
+        const sessions = await this.refreshTokenModel
+            .find({
+                userId,
+                revoked: false,
+                expiresAt: { $gt: now }
+            })
+            .sort({ lastUsedAt: -1 })
+            .exec();
+
+        return sessions.map(session => ({
+            id: session._id.toString(),
+            deviceName: session.deviceName || 'Unknown Device',
+            browser: session.browser || 'Unknown Browser',
+            os: session.os || 'Unknown OS',
+            ipAddress: session.ipAddress,
+            location: session.location || 'Unknown',
+            createdAt: (session as any).createdAt,
+            lastUsedAt: session.lastUsedAt || (session as any).createdAt,
+            expiresAt: session.expiresAt,
+            isCurrent: false // Will be set by controller based on current token
+        }));
+    }
+
+    /**
+     * Revokes a specific session by token ID.
+     */
+    async revokeSession(userId: string, sessionId: string, ipAddress?: string, userAgent?: string): Promise<void> {
+        const session = await this.refreshTokenModel.findOne({
+            _id: sessionId,
+            userId,
+            revoked: false
+        });
+
+        if (!session) {
+            throw new NotFoundException('Session not found or already revoked');
+        }
+
+        session.revoked = true;
+        session.revokedAt = new Date();
+        await session.save();
+
+        // Log session revocation
+        await this.auditService.logEvent({
+            userId,
+            action: AuditAction.SESSION_REVOKED,
+            category: AuditCategory.SESSION_MANAGEMENT,
+            severity: AuditSeverity.INFO,
+            ipAddress,
+            userAgent,
+            metadata: {
+                revokedSessionId: sessionId,
+                revokedDeviceName: session.deviceName,
+                revokedBrowser: session.browser
+            }
+        });
+    }
+
+    /**
+     * Updates the lastUsedAt timestamp when a token is used for refresh.
+     */
+    async updateSessionActivity(token: string): Promise<void> {
+        await this.refreshTokenModel.updateOne(
+            { token },
+            { lastUsedAt: new Date() }
+        );
+    }
+
+    /**
+     * Gets session count for a user.
+     */
+    async getActiveSessionCount(userId: string): Promise<number> {
+        const now = new Date();
+        return this.refreshTokenModel.countDocuments({
+            userId,
+            revoked: false,
+            expiresAt: { $gt: now }
+        });
     }
 }
