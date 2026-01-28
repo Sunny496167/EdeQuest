@@ -14,9 +14,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(payload: any) {
-        // Payload contains the decoded JWT claims (email, sub -> userId)
-        // We validation is implicitly done by checking the signature.
+        // Payload contains the decoded JWT claims (email, sub -> userId, roles)
+        // Signature validation is implicitly done by passport-jwt.
         // Return the user object that will be attached to Request object.
-        return { userId: payload.sub, email: payload.email };
+        return {
+            userId: payload.sub,
+            email: payload.email,
+            roles: payload.roles || []  // Include roles for authorization
+        };
     }
 }

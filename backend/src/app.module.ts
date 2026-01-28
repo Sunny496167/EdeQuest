@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
@@ -19,6 +20,11 @@ import { MailModule } from './mail/mail.module';
       }),
       inject: [ConfigService],
     }),
+    // Rate limiting configuration - 10 requests per 60 seconds globally
+    ThrottlerModule.forRoot([{
+      ttl: 60000, // 60 seconds
+      limit: 100, // 100 requests per minute (general routes)
+    }]),
     UsersModule,
     AuthModule,
     MailModule,
