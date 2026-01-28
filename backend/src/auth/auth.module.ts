@@ -14,6 +14,7 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 import { RefreshToken, RefreshTokenSchema } from './schemas/refresh-token.schema';
+import { PasswordHistory, PasswordHistorySchema } from './schemas/password-history.schema';
 
 @Module({
     imports: [
@@ -21,9 +22,10 @@ import { RefreshToken, RefreshTokenSchema } from './schemas/refresh-token.schema
         MailModule,
         AuditModule, // Import AuditModule for audit logging
         PassportModule,
-        // Import RefreshToken schema
+        // Import RefreshToken and PasswordHistory schemas
         MongooseModule.forFeature([
-            { name: RefreshToken.name, schema: RefreshTokenSchema }
+            { name: RefreshToken.name, schema: RefreshTokenSchema },
+            { name: PasswordHistory.name, schema: PasswordHistorySchema }
         ]),
         // Configure JwtModule asynchronously to access ConfigService
         JwtModule.registerAsync({

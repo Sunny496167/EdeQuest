@@ -33,16 +33,63 @@ async function bootstrap() {
   // Swagger API documentation
   const config = new DocumentBuilder()
     .setTitle('EdeQuest API')
-    .setDescription('Educational platform API with professional authentication and authorization')
-    .setVersion('1.0')
-    .addTag('Authentication', 'User authentication and authorization endpoints')
-    .addTag('Users', 'User management endpoints')
+    .setDescription(`
+# EdeQuest Educational Platform API
+
+A comprehensive RESTful API for the EdeQuest educational platform with enterprise-grade authentication, authorization, and security features.
+
+## Features
+
+- 🔐 **JWT-based Authentication** - Secure access and refresh token flow
+- 🔄 **Token Rotation** - Automatic refresh token rotation for enhanced security  
+- 👥 **Session Management** - View and manage active sessions across devices
+- 🔒 **Password Security** - Advanced validation, history tracking, and reuse prevention
+- 📊 **Audit Logging** - Comprehensive tracking of security events
+- 🛡️ **Role-Based Access Control** - Fine-grained permissions
+- 🌐 **OAuth Integration** - Google authentication support
+- ⚡ **Rate Limiting** - API protection against abuse
+
+## Authentication
+
+This API uses JWT (JSON Web Tokens) for authentication. To access protected endpoints:
+
+1. **Login** or **Register** to receive access and refresh tokens
+2. Include the access token in the **Authorization** header: \`Bearer <token>\`
+3. Access tokens expire after 15 minutes
+4. Use the refresh token to obtain new access tokens
+5. Refresh tokens expire after 7 days
+
+## Base URL
+
+\`\`\`
+http://localhost:3000
+\`\`\`
+
+## API Documentation
+
+Interactive documentation available at: \`/api-docs\`
+    `)
+    .setVersion('1.0.0')
+    .setContact(
+      'EdeQuest Support',
+      'https://edequest.com/support',
+      'support@edequest.com'
+    )
+    .setLicense('MIT', 'https://opensource.org/licenses/MIT')
+    .setExternalDoc('Additional Documentation', 'https://docs.edequest.com')
+    // API Tags with descriptions
+    .addTag('Authentication', 'User authentication, registration, and password management')
+    .addTag('Sessions', 'Session management and device tracking')
+    .addTag('Users', 'User profile and account management')
+    .addTag('Audit', 'Security audit logs and monitoring')
     .addBearerAuth(
       {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        description: 'Enter JWT token',
+        description: 'Enter your JWT access token',
+        name: 'Authorization',
+        in: 'header',
       },
       'JWT-auth',
     )

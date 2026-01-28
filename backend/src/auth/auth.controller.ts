@@ -244,4 +244,56 @@ export class AuthController {
             sessionId
         };
     }
+
+    // ==================== PASSWORD MANAGEMENT ====================
+
+    @Post('change-password')
+    @HttpCode(HttpStatus.OK)
+    @ApiOperation({
+        summary: 'Change user password',
+        description: 'Change authenticated user\'s password with comprehensive validation including strength checks and history prevention'
+    })
+    @ApiResponse({
+        status: 200,
+        description: 'Password changed successfully',
+        schema: {
+            example: {
+                message: 'Password changed successfully'
+            }
+        }
+    })
+    @ApiResponse({
+        status: 400,
+        description: 'Password validation failed',
+        schema: {
+            example: {
+                message: 'Password does not meet security requirements',
+                errors: [
+                    'Password must contain at least one uppercase letter',
+                    'Password must contain at least one special character',
+                    'Password strength is too weak. Minimum required: Fair'
+                ],
+                score: 1
+            }
+        }
+    })
+    @ApiResponse({
+        status: 401,
+        description: 'Current password is incorrect'
+    })
+    @ApiBearerAuth('JWT-auth')
+    async changePassword(@Req() req, @Body() dto: any) {
+        const userId = req.user.userId;
+        const ipAddress = req.ip || req.socket.remoteAddress;
+        const userAgent = req.get('user-agent');
+
+        return this.authService.changePassword(
+            userId,
+            dto.currentPassword,
+            dto.newPassword,
+            dto.confirmPassword,
+            ipAddress,
+            userAgent
+        );
+    }
 }

@@ -63,6 +63,16 @@ export class User {
 
     @Prop()
     lastLoginUserAgent?: string;
+
+    // Password security tracking
+    @Prop({ type: Date })
+    lastPasswordChange?: Date;
+
+    @Prop({ type: Date })
+    passwordExpiresAt?: Date;
+
+    @Prop({ default: false })
+    mustChangePassword: boolean;
 }
 
 // SchemaFactory.createForClass generates the Mongoose schema from the decorated class.

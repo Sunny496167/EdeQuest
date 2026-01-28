@@ -9,9 +9,12 @@ import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { MailService } from '../mail/mail.service';
 import { RefreshToken, RefreshTokenDocument } from './schemas/refresh-token.schema';
+import { PasswordHistory, PasswordHistoryDocument } from './schemas/password-history.schema';
 import { AuditService } from '../audit/audit.service';
 import { AuditAction, AuditCategory, AuditSeverity } from '../audit/schemas/audit-log.schema';
 import { parseUserAgent, getLocationFromIP } from './utils/device-parser.util';
+import { PasswordStrengthValidator } from './validators/password-strength.validator';
+import { DEFAULT_PASSWORD_POLICY } from './config/password-policy.config';
 
 // Account lockout configuration
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -26,8 +29,13 @@ export class AuthService {
         private mailService: MailService,
         private configService: ConfigService,
         @InjectModel(RefreshToken.name) private refreshTokenModel: Model<RefreshTokenDocument>,
+        @InjectModel(PasswordHistory.name) private passwordHistoryModel: Model<PasswordHistoryDocument>,
         private auditService: AuditService,
-    ) { }
+    ) {
+        this.passwordValidator = new PasswordStrengthValidator(DEFAULT_PASSWORD_POLICY);
+    }
+
+    private passwordValidator: PasswordStrengthValidator;
 
     /**
      * Validates a user by email and password with account lockout protection.
@@ -498,5 +506,117 @@ export class AuthService {
             revoked: false,
             expiresAt: { $gt: now }
         });
+    }
+
+    // ==================== PASSWORD MANAGEMENT ====================
+
+    /**
+     * Checks if password was used in recent history
+     */
+    private async checkPasswordHistory(userId: string, newPassword: string): Promise<boolean> {
+        const historyCount = DEFAULT_PASSWORD_POLICY.preventReuse || 5;
+
+        const recentPasswords = await this.passwordHistoryModel
+            .find({ userId })
+            .sort({ createdAt: -1 })
+            .limit(historyCount)
+            .exec();
+
+        for (const record of recentPasswords) {
+            const isMatch = await bcrypt.compare(newPassword, record.passwordHash);
+            if (isMatch) {
+                return true; // Password was used before
+            }
+        }
+
+        return false; // Password not in history
+    }
+
+    /**
+     * Adds password to history
+     */
+    private async addToPasswordHistory(userId: string, passwordHash: string): Promise<void> {
+        await this.passwordHistoryModel.create({
+            userId,
+            passwordHash,
+            createdAt: new Date()
+        });
+    }
+
+    /**
+     * Changes user password with comprehensive validation
+     */
+    async changePassword(
+        userId: string,
+        currentPassword: string,
+        newPassword: string,
+        confirmPassword: string,
+        ipAddress?: string,
+        userAgent?: string
+    ): Promise<{ message: string }> {
+        // Verify passwords match
+        if (newPassword !== confirmPassword) {
+            throw new BadRequestException('New password and confirmation do not match');
+        }
+
+        // Get user
+        const user = await this.usersService.findOne(userId);
+        if (!user || !user.password) {
+            throw new NotFoundException('User not found or has no password');
+        }
+
+        // Verify current password
+        const isCurrentValid = await bcrypt.compare(currentPassword, user.password);
+        if (!isCurrentValid) {
+            throw new UnauthorizedException('Current password is incorrect');
+        }
+
+        // Validate new password strength
+        const userInputs = [user.email, user.name].filter(Boolean);
+        this.passwordValidator.validateOrThrow(newPassword, userInputs);
+
+        // Check password history
+        const wasUsedBefore = await this.checkPasswordHistory(userId, newPassword);
+        if (wasUsedBefore) {
+            const preventCount = DEFAULT_PASSWORD_POLICY.preventReuse || 5;
+            throw new BadRequestException(
+                `Password was used recently. Please choose a password you haven't used in your last ${preventCount} passwords.`
+            );
+        }
+
+        // Hash new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Add current password to history
+        await this.addToPasswordHistory(userId, user.password);
+
+        // Update user with new password
+        const updates: any = {
+            password: hashedPassword,
+            lastPasswordChange: new Date(),
+            mustChangePassword: false
+        };
+
+        // Set password expiry if configured
+        if (DEFAULT_PASSWORD_POLICY.expiryDays) {
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + DEFAULT_PASSWORD_POLICY.expiryDays);
+            updates.passwordExpiresAt = expiryDate;
+        }
+
+        await this.usersService.update(userId, updates);
+
+        // Log password change
+        await this.auditService.logEvent({
+            userId,
+            action: AuditAction.PASSWORD_CHANGED,
+            category: AuditCategory.PASSWORD_MANAGEMENT,
+            severity: AuditSeverity.INFO,
+            ipAddress,
+            userAgent,
+            metadata: { changedBy: 'user' }
+        });
+
+        return { message: 'Password changed successfully' };
     }
 }
