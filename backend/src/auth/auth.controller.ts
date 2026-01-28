@@ -107,8 +107,17 @@ export class AuthController {
     @ApiOperation({ summary: 'Logout and revoke refresh token' })
     @ApiResponse({ status: 200, description: 'Logged out successfully' })
     @ApiBearerAuth('JWT-auth')
-    async logout(@Body() refreshTokenDto: RefreshTokenDto) {
-        await this.authService.revokeRefreshToken(refreshTokenDto.refreshToken);
+    async logout(@Body() refreshTokenDto: RefreshTokenDto, @Req() req) {
+        const ipAddress = req.ip || req.socket.remoteAddress;
+        const userAgent = req.get('user-agent');
+        const userId = req.user?.userId;
+
+        await this.authService.revokeRefreshToken(
+            refreshTokenDto.refreshToken,
+            userId,
+            ipAddress,
+            userAgent
+        );
         return { message: 'Logged out successfully' };
     }
 
@@ -118,7 +127,10 @@ export class AuthController {
     @ApiResponse({ status: 200, description: 'Logged out from all devices' })
     @ApiBearerAuth('JWT-auth')
     async logoutAll(@Req() req) {
-        await this.authService.revokeAllUserTokens(req.user.userId);
+        const ipAddress = req.ip || req.socket.remoteAddress;
+        const userAgent = req.get('user-agent');
+
+        await this.authService.revokeAllUserTokens(req.user.userId, ipAddress, userAgent);
         return { message: 'Logged out from all devices' };
     }
 

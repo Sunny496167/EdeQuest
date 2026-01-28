@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MailModule } from './mail/mail.module';
+import { AuditModule } from './audit/audit.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { MailModule } from './mail/mail.module';
       }),
       inject: [ConfigService],
     }),
-    // Rate limiting configuration - 10 requests per 60 seconds globally
+    // Rate limiting configuration - 100 requests per 60 seconds globally
     ThrottlerModule.forRoot([{
       ttl: 60000, // 60 seconds
       limit: 100, // 100 requests per minute (general routes)
@@ -28,6 +29,7 @@ import { MailModule } from './mail/mail.module';
     UsersModule,
     AuthModule,
     MailModule,
+    AuditModule, // Add audit logging module
   ],
   controllers: [AppController],
   providers: [AppService],

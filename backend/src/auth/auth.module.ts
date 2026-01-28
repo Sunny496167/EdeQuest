@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from '../users/users.module';
 import { MailModule } from '../mail/mail.module';
+import { AuditModule } from '../audit/audit.module';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -18,6 +19,7 @@ import { RefreshToken, RefreshTokenSchema } from './schemas/refresh-token.schema
     imports: [
         UsersModule, // Import UsersModule to access UsersService
         MailModule,
+        AuditModule, // Import AuditModule for audit logging
         PassportModule,
         // Import RefreshToken schema
         MongooseModule.forFeature([

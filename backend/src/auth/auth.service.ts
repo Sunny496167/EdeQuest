@@ -9,6 +9,8 @@ import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { MailService } from '../mail/mail.service';
 import { RefreshToken, RefreshTokenDocument } from './schemas/refresh-token.schema';
+import { AuditService } from '../audit/audit.service';
+import { AuditAction, AuditCategory, AuditSeverity } from '../audit/schemas/audit-log.schema';
 
 // Account lockout configuration
 const MAX_LOGIN_ATTEMPTS = 5;
@@ -23,6 +25,7 @@ export class AuthService {
         private mailService: MailService,
         private configService: ConfigService,
         @InjectModel(RefreshToken.name) private refreshTokenModel: Model<RefreshTokenDocument>,
+        private auditService: AuditService,
     ) { }
 
     /**
@@ -55,25 +58,66 @@ export class AuthService {
                 user.lastLoginUserAgent = userAgent;
                 await user.save();
 
+                // Log successful login
+                await this.auditService.logEvent({
+                    userId: user._id.toString(),
+                    action: AuditAction.LOGIN_SUCCESS,
+                    category: AuditCategory.AUTHENTICATION,
+                    severity: AuditSeverity.INFO,
+                    ipAddress,
+                    userAgent,
+                    metadata: { email: user.email, loginMethod: 'password' }
+                });
+
                 const { password, ...result } = user.toObject();
                 return result;
             }
         }
 
         // Failed login - increment attempts
-        await this.handleFailedLogin(user);
+        await this.handleFailedLogin(user, ipAddress, userAgent);
         return null;
     }
 
     /**
      * Handles failed login attempts and account lockout.
      */
-    private async handleFailedLogin(user: any): Promise<void> {
+    private async handleFailedLogin(user: any, ipAddress?: string, userAgent?: string): Promise<void> {
         user.failedLoginAttempts += 1;
+
+        // Log failed attempt
+        await this.auditService.logEvent({
+            userId: user._id.toString(),
+            action: AuditAction.FAILED_LOGIN_ATTEMPT,
+            category: AuditCategory.AUTHENTICATION,
+            severity: AuditSeverity.WARNING,
+            ipAddress,
+            userAgent,
+            metadata: {
+                email: user.email,
+                failedAttempts: user.failedLoginAttempts,
+                remainingAttempts: MAX_LOGIN_ATTEMPTS - user.failedLoginAttempts
+            }
+        });
 
         if (user.failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
             user.accountLockedUntil = new Date(Date.now() + LOCKOUT_DURATION_MS);
             await user.save();
+
+            // Log account lockout
+            await this.auditService.logEvent({
+                userId: user._id.toString(),
+                action: AuditAction.ACCOUNT_LOCKED,
+                category: AuditCategory.AUTHENTICATION,
+                severity: AuditSeverity.CRITICAL,
+                ipAddress,
+                userAgent,
+                metadata: {
+                    email: user.email,
+                    failedAttempts: user.failedLoginAttempts,
+                    lockedUntil: user.accountLockedUntil
+                }
+            });
 
             const minutesLocked = LOCKOUT_DURATION_MS / 60000;
             throw new UnauthorizedException(
@@ -184,6 +228,17 @@ export class AuthService {
             expiresIn: '15m',
         });
 
+        // Log token refresh
+        await this.auditService.logEvent({
+            userId: (user as any)._id.toString(),
+            action: AuditAction.TOKEN_REFRESH,
+            category: AuditCategory.AUTHENTICATION,
+            severity: AuditSeverity.INFO,
+            ipAddress,
+            userAgent,
+            metadata: { email: user.email }
+        });
+
         return {
             access_token: accessToken,
             refresh_token: newRefreshToken,
@@ -194,24 +249,48 @@ export class AuthService {
     /**
      * Revokes a refresh token (for logout).
      */
-    async revokeRefreshToken(refreshToken: string): Promise<void> {
+    async revokeRefreshToken(refreshToken: string, userId?: string, ipAddress?: string, userAgent?: string): Promise<void> {
         const tokenDoc = await this.refreshTokenModel.findOne({ token: refreshToken });
 
         if (tokenDoc) {
             tokenDoc.revoked = true;
             tokenDoc.revokedAt = new Date();
             await tokenDoc.save();
+
+            // Log logout event
+            if (userId) {
+                await this.auditService.logEvent({
+                    userId,
+                    action: AuditAction.LOGOUT,
+                    category: AuditCategory.AUTHENTICATION,
+                    severity: AuditSeverity.INFO,
+                    ipAddress,
+                    userAgent,
+                    metadata: { sessionRevoked: true }
+                });
+            }
         }
     }
 
     /**
      * Revokes all refresh tokens for a user (logout from all devices).
      */
-    async revokeAllUserTokens(userId: string): Promise<void> {
+    async revokeAllUserTokens(userId: string, ipAddress?: string, userAgent?: string): Promise<void> {
         await this.refreshTokenModel.updateMany(
             { userId, revoked: false },
             { revoked: true, revokedAt: new Date() }
         );
+
+        // Log logout from all devices
+        await this.auditService.logEvent({
+            userId,
+            action: AuditAction.ALL_SESSIONS_REVOKED,
+            category: AuditCategory.SESSION_MANAGEMENT,
+            severity: AuditSeverity.WARNING,
+            ipAddress,
+            userAgent,
+            metadata: { allSessionsRevoked: true }
+        });
     }
 
     /**
